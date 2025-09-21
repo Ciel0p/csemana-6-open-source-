@@ -1,3 +1,6 @@
 {
-
+  "option" : {
+    "home": "Home",
+    "about": "About Us"
+  }
 }
