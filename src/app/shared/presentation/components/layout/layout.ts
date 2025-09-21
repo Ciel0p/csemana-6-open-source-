@@ -4,6 +4,7 @@ import {MatToolbar, MatToolbarRow} from '@angular/material/toolbar';
 import {MatButton} from '@angular/material/button';
 import {TranslatePipe} from '@ngx-translate/core';
 import {LanguageSwitcher} from '../language-switcher/language-switcher';
+import {FooterContent} from '../footer-content/footer-content';
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +16,8 @@ import {LanguageSwitcher} from '../language-switcher/language-switcher';
     MatButton,
     RouterLinkActive,
     TranslatePipe,
-    LanguageSwitcher
+    LanguageSwitcher,
+    FooterContent
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.css'
