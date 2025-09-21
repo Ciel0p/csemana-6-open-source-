@@ -27,5 +27,4 @@ export class Layout {
     {link: '/home', label: 'option.home'},
     {link: '/about', label: 'option.about'}
   ]
-
 }
