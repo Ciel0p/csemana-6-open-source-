@@ -2,5 +2,14 @@
   "option" : {
     "home": "Inicio",
     "about": "Acerca de"
+  },
+  "about": {
+    "title": "Acerca de nosotros",
+    "content": "ACME Learning Center es una plataforma educativa, parte de ACME Corporation."
+  },
+  "home": {
+    "title": "Bienvenido",
+    "content": "Bienvenido a ACME Learning Center."
   }
+
 }

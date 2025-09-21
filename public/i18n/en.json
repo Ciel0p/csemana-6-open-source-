@@ -1,6 +1,14 @@
 {
-  "option" : {
+  "option": {
     "home": "Home",
     "about": "About Us"
+  },
+  "about": {
+    "title": "About us",
+    "content": "ACME Learning Center is an Education Platform, part of ACME Corporation."
+  },
+  "home": {
+    "title": "Welcome",
+    "content": "Welcome to ACME Learning Center."
   }
 }
