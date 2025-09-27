@@ -19,7 +19,7 @@ export abstract class BaseApiEndpoint<
   TResponse extends BaseResponse,
   TAssembler extends BaseAssembler<TEntity, TResource, TResponse>
 > {
-  protected constructor(
+  constructor(
     protected http: HttpClient,
     protected endpointUrl: string,
     protected assembler: TAssembler
