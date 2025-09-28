@@ -1,5 +1,4 @@
 import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-response';
-import {Category} from '../domain/model/category.entity';
 
 /**
  * Represents the API resource/DTO for a category.
@@ -14,6 +13,7 @@ export interface CategoryResource extends BaseResource {
    * The name of the category.
    */
   name: string;
+
 }
 
 /**
