@@ -1,18 +1,66 @@
 {
   "categories": [
-    { "id": 1, "name": "Java" },
-    { "id": 2, "name": "Spring Boot" },
-    { "id": 3, "name": "TypeScript" },
-    { "id": 4, "name": "Angular" }
+    {
+      "id": 1,
+      "name": "Java"
+    },
+    {
+      "id": 2,
+      "name": "Spring Boot"
+    },
+    {
+      "id": 3,
+      "name": "TypeScript"
+    },
+    {
+      "id": 4,
+      "name": "Angular"
+    },
+    {
+      "id": 5,
+      "name": "RESTful"
+    }
   ],
   "courses": [
-    { "id": 1, "name": "Java for Beginners", "categoryId": 1 },
-    { "id": 2, "name": "Advanced Java", "categoryId": 1 },
-    { "id": 3, "name": "Spring Boot Basics", "categoryId": 2 },
-    { "id": 4, "name": "Building REST APIs with Spring Boot", "categoryId": 2 },
-    { "id": 5, "name": "TypeScript Fundamentals", "categoryId": 3 },
-    { "id": 6, "name": "Advanced TypeScript", "categoryId": 3 },
-    { "id": 7, "name": "Angular for Beginners", "categoryId": 4 },
-    { "id": 8, "name": "Advanced Angular", "categoryId": 4 }
+    {
+      "id": 1,
+      "name": "Java for Beginners",
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "name": "Advanced Java",
+      "categoryId": 1
+    },
+    {
+      "id": 3,
+      "name": "Spring Boot Basics",
+      "categoryId": 2
+    },
+    {
+      "id": 4,
+      "name": "Building REST APIs with Spring Boot",
+      "categoryId": 2
+    },
+    {
+      "id": 5,
+      "name": "TypeScript Fundamentals",
+      "categoryId": 3
+    },
+    {
+      "id": 6,
+      "name": "Advanced TypeScript",
+      "categoryId": 3
+    },
+    {
+      "id": 7,
+      "name": "Angular for Beginners",
+      "categoryId": 4
+    },
+    {
+      "id": 8,
+      "name": "Advanced Angular",
+      "categoryId": 4
+    }
   ]
 }
