@@ -46,7 +46,7 @@ export class LearningStore {
     this.errorSignal.set(null);
     this.learningApi.createCourse(course).pipe(retry(2)).subscribe({
       next: createdCourse => {
-        this.assignCategoryToCourse(createdCourse);
+        //this.assignCategoryToCourse(createdCourse);
         this.coursesSignal.update(courses => [...courses, createdCourse]);
         this.loadingSignal.set(false);
       },
@@ -66,7 +66,7 @@ export class LearningStore {
     this.errorSignal.set(null);
     this.learningApi.updateCourse(updatedCourse).pipe(retry(2)).subscribe({
       next: course => {
-        this.assignCategoryToCourse(course);
+        //this.assignCategoryToCourse(course);
         this.coursesSignal.update(courses =>
           courses.map(c => c.id === course.id ? course : c)
         );
@@ -165,9 +165,10 @@ export class LearningStore {
     this.errorSignal.set(null);
     this.learningApi.getCourses().pipe(takeUntilDestroyed()).subscribe({
       next: courses => {
+        console.log(courses);
         this.coursesSignal.set(courses);
         this.loadingSignal.set(false);
-        this.assignCategoriesToCourses();
+        //this.assignCategoriesToCourses();
       },
       error: err => {
         this.errorSignal.set(this.formatError(err, 'Failed to load courses'));
