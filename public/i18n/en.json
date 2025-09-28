@@ -1,7 +1,9 @@
 {
   "option": {
     "home": "Home",
-    "about": "About Us"
+    "about": "About Us",
+    "categories": "Categories",
+    "courses": "Courses"
   },
   "about": {
     "title": "About us",
