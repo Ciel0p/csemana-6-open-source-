@@ -23,6 +23,11 @@ export interface CourseResource extends BaseResource {
    * Description of the course.
    */
   description: string;
+
+  /**
+   * Identifier for the category this course belongs to.
+   */
+  categoryId: number;
 }
 
 /**
