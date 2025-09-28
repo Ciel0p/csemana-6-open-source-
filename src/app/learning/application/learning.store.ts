@@ -3,6 +3,7 @@ import {Course} from '../domain/model/couse.entity';
 import {Category} from '../domain/model/category.entity';
 import {LearningApi} from '../infrastructure/learning-api';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {retry} from 'rxjs';
 
 /**
  * State management store for courses and categories using Angular signals.
@@ -43,7 +44,7 @@ export class LearningStore {
   addCourse(course: Course): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
-    this.learningApi.createCourse(course).pipe(takeUntilDestroyed()).subscribe({
+    this.learningApi.createCourse(course).pipe(retry(2)).subscribe({
       next: createdCourse => {
         this.assignCategoryToCourse(createdCourse);
         this.coursesSignal.update(courses => [...courses, createdCourse]);
@@ -63,7 +64,7 @@ export class LearningStore {
   updateCourse(updatedCourse: Course): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
-    this.learningApi.updateCourse(updatedCourse).pipe(takeUntilDestroyed()).subscribe({
+    this.learningApi.updateCourse(updatedCourse).pipe(retry(2)).subscribe({
       next: course => {
         this.assignCategoryToCourse(course);
         this.coursesSignal.update(courses =>
@@ -85,7 +86,7 @@ export class LearningStore {
   deleteCourse(id: number): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
-    this.learningApi.deleteCourse(id).pipe(takeUntilDestroyed()).subscribe({
+    this.learningApi.deleteCourse(id).pipe(retry(2)).subscribe({
       next: () => {
         this.coursesSignal.update(courses => courses.filter(c => c.id !== id));
         this.loadingSignal.set(false);
@@ -104,7 +105,7 @@ export class LearningStore {
   addCategory(category: Category): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
-    this.learningApi.createCategory(category).pipe(takeUntilDestroyed()).subscribe({
+    this.learningApi.createCategory(category).pipe(retry(2)).subscribe({
       next: createdCategory => {
         this.categoriesSignal.update(categories => [...categories, createdCategory]);
         this.loadingSignal.set(false);
@@ -123,7 +124,7 @@ export class LearningStore {
   updateCategory(updatedCategory: Category): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
-    this.learningApi.updateCategory(updatedCategory).pipe(takeUntilDestroyed()).subscribe({
+    this.learningApi.updateCategory(updatedCategory).pipe(retry(2)).subscribe({
       next: category => {
         this.categoriesSignal.update(categories =>
           categories.map(c => c.id === category.id ? category : c)
@@ -144,7 +145,7 @@ export class LearningStore {
   deleteCategory(id: number): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
-    this.learningApi.deleteCategory(id).pipe(takeUntilDestroyed()).subscribe({
+    this.learningApi.deleteCategory(id).pipe(retry(2)).subscribe({
       next: () => {
         this.categoriesSignal.update(categories => categories.filter(c => c.id !== id));
         this.loadingSignal.set(false);
