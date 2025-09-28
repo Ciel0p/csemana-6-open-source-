@@ -3,6 +3,7 @@ import {Course} from '../domain/model/couse.entity';
 import {CourseResource, CoursesResponse} from './courses-response';
 import {CourseAssembler} from './course-assembler';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 
 /**
@@ -10,6 +11,6 @@ import {HttpClient} from '@angular/common/http';
  */
 export class CoursesApiEndpoint extends BaseApiEndpoint<Course, CourseResource, CoursesResponse, CourseAssembler> {
   constructor(http: HttpClient) {
-    super(http, '/api/courses', new CourseAssembler());
+    super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderCoursesEndpointPath}`, new CourseAssembler());
   }
 }
