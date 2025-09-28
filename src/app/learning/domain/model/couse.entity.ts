@@ -73,12 +73,12 @@ export class Course {
    * @param course.description - The description of the course.
    * @param course.categoryId - The identifier of the category associated with the course.
    */
-  constructor(course: { id?: number; title?: string; description?: string; categoryId?: number }) {
+  constructor(course: { id?: number; title?: string; description?: string; categoryId?: number; category?: Category | null }) {
     this._id = course.id ?? 0;
     this._title = course.title ?? '';
     this._description = course.description ?? '';
     this._categoryId = course.categoryId ?? 0;
-    this._category = null;
+    this._category = course.category ?? null;
   }
 
   /**
