@@ -1,4 +1,4 @@
-import {computed, Injectable, signal} from '@angular/core';
+import {computed, Injectable, Signal, signal} from '@angular/core';
 import {Course} from '../domain/model/couse.entity';
 import {Category} from '../domain/model/category.entity';
 import {LearningApi} from '../infrastructure/learning-api';
@@ -25,6 +25,15 @@ export class LearningStore {
   constructor(private learningApi: LearningApi) {
     this.loadCategories();
     this.loadCourses();
+  }
+
+  /**
+   * Retrieves a category by its ID as a signal.
+   * @param id - The ID of the category.
+   * @returns A Signal containing the Category object or undefined if not found.
+   */
+  getCategoryById(id: number | null | undefined): Signal<Category | undefined> {
+    return computed(() => id ? this.categories().find(c => c.id === id) : undefined);
   }
 
   /**
