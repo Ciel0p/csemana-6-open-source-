@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {LearningStore} from '../../../application/learning.store';
 import {Category} from '../../../domain/model/category.entity';
@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-category-form',
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule],
   templateUrl: './category-form.html',
   styleUrl: './category-form.css'
 })
@@ -52,6 +52,6 @@ export class CategoryForm {
       this.store.addCategory(category);
     }
 
-    this.router.navigate(['learning/categories']);
+    this.router.navigate(['learning/categories']).then();
   }
 }

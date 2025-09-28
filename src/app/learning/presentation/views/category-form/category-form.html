@@ -2,7 +2,7 @@
   <mat-form-field>
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" required>
-    @if (form.get('name')?.hasError('required')) {
+    @if (form.get('name')!.touched && form.get('name')!.hasError('required')) {
       <mat-error>Name is required</mat-error>
     }
   </mat-form-field>
