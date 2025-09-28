@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {MatToolbar, MatToolbarRow} from '@angular/material/toolbar';
 import {MatButton} from '@angular/material/button';

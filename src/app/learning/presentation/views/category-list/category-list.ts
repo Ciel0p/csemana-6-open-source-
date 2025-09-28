@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
+import {Component, inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 import {LearningStore} from '../../../application/learning.store';
 import {MatError} from '@angular/material/form-field';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';

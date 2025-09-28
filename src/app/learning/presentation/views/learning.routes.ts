@@ -1,4 +1,5 @@
 import {Routes} from '@angular/router';
+
 const courseList = () => import('./course-list/course-list').then(m => m.CourseList);
 const courseForm = () => import('./course-form/course-form').then(m => m.CourseForm);
 const categoryList = () => import('./category-list/category-list').then(m => m.CategoryList);

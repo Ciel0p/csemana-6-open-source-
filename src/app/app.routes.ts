@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {Home} from './shared/presentation/views/home/home';
 
 const about = () => import('./shared/presentation/views/about/about').then(m => m.About);
