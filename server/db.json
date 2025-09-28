@@ -24,43 +24,74 @@
   "courses": [
     {
       "id": 1,
-      "name": "Java for Beginners",
-      "categoryId": 1
+      "title": "Java for Beginners",
+      "description": "An introductory course to Java programming language."
     },
     {
       "id": 2,
-      "name": "Advanced Java",
+      "title": "Advanced Java Concepts",
+      "description": "A deep dive into advanced Java programming topics.",
       "categoryId": 1
     },
     {
       "id": 3,
-      "name": "Spring Boot Basics",
+      "title": "Spring Boot Fundamentals",
+      "description": "Learn the basics of Spring Boot framework.",
       "categoryId": 2
     },
     {
       "id": 4,
-      "name": "Building REST APIs with Spring Boot",
+      "title": "Building RESTful APIs with Spring Boot",
+      "description": "Create robust RESTful APIs using Spring Boot.",
       "categoryId": 2
     },
     {
       "id": 5,
-      "name": "TypeScript Fundamentals",
+      "title": "TypeScript Essentials",
+      "description": "Get started with TypeScript and its features.",
       "categoryId": 3
     },
     {
       "id": 6,
-      "name": "Advanced TypeScript",
+      "title": "Advanced TypeScript",
+      "description": "Explore advanced concepts in TypeScript programming.",
       "categoryId": 3
     },
     {
       "id": 7,
-      "name": "Angular for Beginners",
+      "title": "Angular for Beginners",
+      "description": "An introductory course to Angular framework.",
       "categoryId": 4
     },
     {
       "id": 8,
-      "name": "Advanced Angular",
+      "title": "Building SPAs with Angular",
+      "description": "Learn how to build Single Page Applications using Angular.",
       "categoryId": 4
+    },
+    {
+      "id": 9,
+      "title": "RESTful Web Services",
+      "description": "Understand the principles of RESTful web services.",
+      "categoryId": 5
+    },
+    {
+      "id": 10,
+      "title": "Consuming RESTful APIs",
+      "description": "Learn how to consume RESTful APIs in your applications.",
+      "categoryId": 5
+    },
+    {
+      "id": 11,
+      "title": "Full-Stack Development with Java and Angular",
+      "description": "Combine Java backend with Angular frontend for full-stack development.",
+      "categoryId": 1
+    },
+    {
+      "id": 12,
+      "title": "Microservices with Spring Boot",
+      "description": "Build and deploy microservices using Spring Boot.",
+      "categoryId": 2
     }
   ]
 }
