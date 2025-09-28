@@ -12,6 +12,7 @@ import {
   MatTable
 } from '@angular/material/table';
 import {MatButton} from '@angular/material/button';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-course-list',
@@ -27,14 +28,15 @@ import {MatButton} from '@angular/material/button';
     MatRowDef,
     MatButton,
     MatHeaderRow,
-    MatRow
+    MatRow,
+    MatProgressSpinner
   ],
   templateUrl: './course-list.html',
   styleUrl: './course-list.css'
 })
 export class CourseList {
   readonly store = inject(LearningStore);
-  private router = inject(Router);
+  protected router = inject(Router);
 
   displayedColumns: string[] = ['id', 'title', 'description', 'category', 'actions'];
 
