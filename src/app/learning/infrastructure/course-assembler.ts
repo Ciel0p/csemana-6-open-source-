@@ -12,6 +12,7 @@ export class CourseAssembler implements BaseAssembler<Course, CourseResource, Co
    * @returns An array of Course entities.
    */
   toEntitiesFromResponse(response: CoursesResponse): Course[] {
+    console.log(response);
     return response.courses.map(resource => this.toEntityFromResource(resource as CourseResource));
   }
 
@@ -24,7 +25,8 @@ export class CourseAssembler implements BaseAssembler<Course, CourseResource, Co
     return new Course({
       id: resource.id,
       title: resource.title,
-      description: resource.description
+      description: resource.description,
+      categoryId: resource.categoryId
     });
   }
 
