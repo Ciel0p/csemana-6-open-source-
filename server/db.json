@@ -90,8 +90,9 @@
     {
       "id": 12,
       "title": "Microservices with Spring Boot",
-      "description": "Build and deploy microservices using Spring Boot.",
+      "description": "Build microservices architecture using Spring Boot.",
       "categoryId": 2
     }
+
   ]
 }
