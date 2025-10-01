@@ -40,8 +40,9 @@ export class CourseForm {
     this.route.params.subscribe(params => {
       this.courseId = params['id'] ? +params['id'] : null;
       this.isEdit = !!this.courseId;
-      if (this.isEdit) {
-        const course = this.store.courses().find(c => c.id === this.courseId);
+      if (this.isEdit && this.courseId) {
+        let id = this.courseId;
+        const course = this.store.getCourseById(id)();
         if (course) {
           this.form.patchValue({
             title: course.title,
@@ -55,7 +56,8 @@ export class CourseForm {
 
   submit() {
     if (this.form.invalid) return;
-    const category: Category | null = this.store.getCategoryById(this.form.value.categoryId)() ?? null;
+    let id = this.form.value.categoryId ?? 0;
+    const category: Category | null = this.store.getCategoryById(id)() ?? null;
     const course: Course = new Course({
       id: this.courseId ?? 0,
       title: this.form.value.title!,
