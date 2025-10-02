@@ -39,7 +39,8 @@ export class CourseAssembler implements BaseAssembler<Course, CourseResource, Co
     return {
       id: entity.id,
       title: entity.title,
-      description: entity.description
+      description: entity.description,
+      categoryId: entity.categoryId
     } as CourseResource;
   }
 }
