@@ -8,6 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInput} from '@angular/material/input';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-course-form',
@@ -16,7 +17,8 @@ import {MatInput} from '@angular/material/input';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
-    MatInput
+    MatInput,
+    TranslatePipe
   ],
   templateUrl: './course-form.html',
   styleUrl: './course-form.css'
@@ -56,14 +58,11 @@ export class CourseForm {
 
   submit() {
     if (this.form.invalid) return;
-    let id = this.form.value.categoryId ?? 0;
-    const category: Category | null = this.store.getCategoryById(id)() ?? null;
     const course: Course = new Course({
       id: this.courseId ?? 0,
       title: this.form.value.title!,
       description: this.form.value.description!,
-      categoryId: this.form.value.categoryId ?? 0,
-      category: category ?? null
+      categoryId: this.form.value.categoryId ?? 0
     });
 
     if (this.isEdit) {
