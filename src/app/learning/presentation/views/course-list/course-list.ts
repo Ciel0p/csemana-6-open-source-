@@ -1,4 +1,4 @@
-import {Component, computed, inject, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, computed, inject, ViewChild} from '@angular/core';
 import {LearningStore} from '../../../application/learning.store';
 import {Router} from '@angular/router';
 import {MatError} from '@angular/material/form-field';
@@ -48,7 +48,7 @@ import {MatPaginator} from '@angular/material/paginator';
   templateUrl: './course-list.html',
   styleUrl: './course-list.css'
 })
-export class CourseList{
+export class CourseList implements AfterViewChecked {
   readonly store = inject(LearningStore);
   protected router = inject(Router);
 
@@ -70,5 +70,18 @@ export class CourseList{
 
   deleteCourse(id: number) {
     this.store.deleteCourse(id);
+  }
+
+  navigateToNew() {
+    this.router.navigate(['learning/courses/new']).then();
+  }
+
+  ngAfterViewChecked() {
+    if (this.dataSource().paginator !== this.paginator) {
+      this.dataSource().paginator = this.paginator;
+    }
+    if (this.dataSource().sort !== this.sort) {
+      this.dataSource().sort = this.sort;
+    }
   }
 }
