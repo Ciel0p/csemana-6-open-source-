@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, computed, inject, ViewChild} from '@angular/core';
 import {LearningStore} from '../../../application/learning.store';
 import {Router} from '@angular/router';
 import {MatError} from '@angular/material/form-field';
@@ -12,10 +12,14 @@ import {
   MatHeaderRowDef,
   MatRow,
   MatRowDef,
-  MatTable
+  MatTable, MatTableDataSource
 } from '@angular/material/table';
-import {MatButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {TranslatePipe} from '@ngx-translate/core';
+import {MatIcon} from '@angular/material/icon';
+import {MatSort, MatSortHeader} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-course-list',
@@ -32,7 +36,13 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
     MatButton,
     MatHeaderRow,
     MatRow,
-    MatProgressSpinner
+    MatProgressSpinner,
+    TranslatePipe,
+    MatIcon,
+    MatIconButton,
+    MatSort,
+    MatSortHeader,
+    MatPaginator
   ],
   templateUrl: './course-list.html',
   styleUrl: './course-list.css'
@@ -43,8 +53,18 @@ export class CourseList {
 
   displayedColumns: string[] = ['id', 'title', 'description', 'category', 'actions'];
 
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  dataSource = computed(() => {
+    const source = new MatTableDataSource(this.store.courses());
+    source.sort = this.sort;
+    source.paginator = this.paginator;
+    return source;
+  });
+
   editCourse(id: number) {
-    this.router.navigate(['learning/courses/edit', id]).then();
+    this.router.navigate(['learning/courses', id, 'edit']).then();
   }
 
   deleteCourse(id: number) {
