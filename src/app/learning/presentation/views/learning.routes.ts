@@ -7,8 +7,8 @@ const categoryForm = () => import('./category-form/category-form').then(m => m.C
 export const learningRoutes: Routes = [
   { path: 'courses',              loadComponent: courseList },
   { path: 'courses/new',          loadComponent: courseForm },
-  { path: 'courses/edit/:id',     loadComponent: courseForm },
+  { path: 'courses/:id/edit',     loadComponent: courseForm },
   { path: 'categories',           loadComponent: categoryList },
   { path: 'categories/new',       loadComponent: categoryForm },
-  { path: 'categories/edit/:id',  loadComponent: categoryForm }
+  { path: 'categories/:id/edit',  loadComponent: categoryForm }
 ];
