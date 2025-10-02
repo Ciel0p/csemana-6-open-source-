@@ -12,7 +12,8 @@ import {
   MatHeaderRowDef,
   MatRow,
   MatRowDef,
-  MatTable, MatTableDataSource
+  MatTable,
+  MatTableDataSource
 } from '@angular/material/table';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
@@ -47,7 +48,7 @@ import {MatPaginator} from '@angular/material/paginator';
   templateUrl: './course-list.html',
   styleUrl: './course-list.css'
 })
-export class CourseList {
+export class CourseList{
   readonly store = inject(LearningStore);
   protected router = inject(Router);
 
