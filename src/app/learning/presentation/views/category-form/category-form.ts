@@ -6,10 +6,11 @@ import {Category} from '../../../domain/model/category.entity';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-category-form',
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './category-form.html',
   styleUrl: './category-form.css'
 })
