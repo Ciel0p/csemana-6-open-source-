@@ -48,7 +48,7 @@
     {
       "id": 5,
       "title": "TypeScript Essentials",
-      "description": "Get started with TypeScript and its features.",
+      "description": "Get started with TypeScript and its features and more.",
       "categoryId": 3
     },
     {
@@ -93,6 +93,5 @@
       "description": "Build microservices architecture using Spring Boot.",
       "categoryId": 2
     }
-
   ]
 }
