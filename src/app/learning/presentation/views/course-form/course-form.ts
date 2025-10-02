@@ -3,7 +3,6 @@ import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angula
 import {ActivatedRoute, Router} from '@angular/router';
 import {LearningStore} from '../../../application/learning.store';
 import {Course} from '../../../domain/model/couse.entity';
-import {Category} from '../../../domain/model/category.entity';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
