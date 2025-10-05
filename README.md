@@ -1,4 +1,4 @@
-# LearningCenter
+# ACME Learning Center Application (learning-center)
 
 ## Overview
 LearningCenter is a modular, domain-driven Angular application for managing learning resources, such as courses and categories. It is designed with the best practices in architecture, maintainability, and scalability in mind.
