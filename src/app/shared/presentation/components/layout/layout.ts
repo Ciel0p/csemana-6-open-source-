@@ -5,6 +5,9 @@ import {MatButton} from '@angular/material/button';
 import {TranslatePipe} from '@ngx-translate/core';
 import {LanguageSwitcher} from '../language-switcher/language-switcher';
 import {FooterContent} from '../footer-content/footer-content';
+import {
+  AuthenticationSection
+} from '../../../../iam/presentation/components/authentication-section/authentication-section';
 
 @Component({
   selector: 'app-layout',
@@ -17,7 +20,8 @@ import {FooterContent} from '../footer-content/footer-content';
     RouterLinkActive,
     TranslatePipe,
     LanguageSwitcher,
-    FooterContent
+    FooterContent,
+    AuthenticationSection
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.css'
