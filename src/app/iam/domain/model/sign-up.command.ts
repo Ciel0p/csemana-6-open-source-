@@ -1,5 +1,5 @@
 /**
- * Command object for user sign-up operations.
+ * Command object for user sign-up operations in the domain layer of the IAM bounded context.
  * Contains the username and password for registration.
  */
 export class SignUpCommand {

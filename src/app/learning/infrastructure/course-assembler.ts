@@ -3,7 +3,7 @@ import {Course} from '../domain/model/couse.entity';
 import {BaseAssembler} from '../../shared/infrastructure/base-assembler';
 
 /**
- * Assembler for converting between Course entities, CourseResource resources, and CoursesResponse.
+ * Assembler for converting between Course entities, CourseResource resources, and CoursesResponse in the infrastructure layer of the learning bounded context.
  */
 export class CourseAssembler implements BaseAssembler<Course, CourseResource, CoursesResponse> {
   /**

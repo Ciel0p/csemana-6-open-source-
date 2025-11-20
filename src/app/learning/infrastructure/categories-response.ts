@@ -1,7 +1,7 @@
 import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-response';
 
 /**
- * Represents the API resource for a category.
+ * Represents the API resource for a category in the infrastructure layer of the learning bounded context.
  */
 export interface CategoryResource extends BaseResource {
   /**
@@ -17,7 +17,7 @@ export interface CategoryResource extends BaseResource {
 }
 
 /**
- * Represents the API response structure for a list of categories.
+ * Represents the API response structure for a list of categories in the infrastructure layer of the learning bounded context.
  */
 export interface CategoriesResponse extends BaseResponse {
   /**

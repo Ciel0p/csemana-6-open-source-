@@ -1,7 +1,7 @@
 import {Category} from './category.entity';
 
 /**
- * Represents a course entity with id, title, description, and category.
+ * Represents a course entity with id, title, description, and category in the domain layer of the learning bounded context.
  *
  * @remarks
  * This class is used as a domain model for courses in the learning context.

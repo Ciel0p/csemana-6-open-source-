@@ -3,7 +3,7 @@ import {SignInCommand} from '../domain/model/sign-in.command';
 import {SignInRequest} from './sign-in.request';
 
 /**
- * Assembler for converting between sign-in commands, requests, and responses.
+ * Assembler for converting between sign-in commands, requests, and responses in the infrastructure layer of the IAM bounded context.
  */
 export class SignInAssembler {
   /**

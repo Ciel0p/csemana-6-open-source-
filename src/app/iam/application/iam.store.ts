@@ -6,7 +6,7 @@ import {IamApi} from '../infrastructure/iam-api';
 import {SignUpCommand} from '../domain/model/sign-up.command';
 
 /**
- * Store for managing Identity and Access Management (IAM) state.
+ * Application service store for managing Identity and Access Management state in the IAM bounded context.
  * Handles user authentication, sign-in, sign-up, and user data.
  */
 @Injectable({providedIn: 'root'})

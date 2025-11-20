@@ -1,5 +1,5 @@
 /**
- * Command object for user sign-in operations.
+ * Command object for user sign-in operations in the domain layer of the IAM bounded context.
  * Contains the username and password for authentication.
  */
 export class SignInCommand {

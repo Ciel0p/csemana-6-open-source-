@@ -6,7 +6,7 @@ import {BaseResource, BaseResponse} from './base-response';
 import {BaseAssembler} from './base-assembler';
 
 /**
- * Base class for API endpoint operations with generic CRUD functionality.
+ * Base class for API endpoint operations with generic CRUD functionality in the infrastructure layer.
  *
  * @template TEntity - The entity type, which must extend BaseEntity.
  * @template TResource - The resource type, must extend BaseResource.

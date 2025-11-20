@@ -3,7 +3,7 @@ import {SignUpCommand} from '../domain/model/sign-up.command';
 import {SignUpResource, SignUpResponse} from './sign-up-response';
 
 /**
- * Assembler for converting between sign-up commands, requests, and responses.
+ * Assembler for converting between sign-up commands, requests, and responses in the infrastructure layer of the IAM bounded context.
  */
 export class SignUpAssembler {
   /**

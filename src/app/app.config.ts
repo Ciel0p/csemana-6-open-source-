@@ -7,7 +7,7 @@ import {provideTranslateService} from '@ngx-translate/core';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 
 /**
- * Application configuration for dependency injection and providers.
+ * Application configuration for dependency injection and providers in the infrastructure layer.
  */
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -9,7 +9,7 @@ import {ErrorHandlingEnabledBaseType} from '../../shared/infrastructure/error-ha
 const signInApiEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderSignInEndpointPath}`;
 
 /**
- * API endpoint for handling user sign-in operations.
+ * API endpoint for handling user sign-in operations in the infrastructure layer of the IAM bounded context.
  * Extends ErrorHandlingEnabledBaseType for error management.
  */
 export class SignInApiEndpoint extends ErrorHandlingEnabledBaseType {

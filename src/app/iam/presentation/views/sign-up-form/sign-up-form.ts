@@ -10,7 +10,7 @@ import {IamStore} from '../../../application/iam.store';
 import {SignUpCommand} from '../../../domain/model/sign-up.command';
 
 /**
- * Component for the sign-up form view.
+ * Component for the sign-up form view in the presentation layer of the IAM bounded context.
  * Allows users to register with username and password.
  */
 @Component({

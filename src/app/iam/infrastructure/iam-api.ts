@@ -12,7 +12,7 @@ import {SignInCommand} from '../domain/model/sign-in.command';
 import {SignInResource} from './sign-in-response';
 
 /**
- * API service for Identity and Access Management (IAM) operations.
+ * API service for Identity and Access Management operations in the infrastructure layer of the IAM bounded context.
  * Handles user sign-up and sign-in through dedicated endpoints.
  */
 @Injectable({providedIn: 'root'})

@@ -1,7 +1,7 @@
 import {FormGroup} from '@angular/forms';
 
 /**
- * Base class for form components providing common form validation utilities.
+ * Base class for form components providing common form validation utilities in the presentation layer.
  */
 export class BaseForm {
   /**

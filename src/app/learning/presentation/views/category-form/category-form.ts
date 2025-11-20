@@ -9,7 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {TranslatePipe} from '@ngx-translate/core';
 
 /**
- * Component for creating or editing a category.
+ * Component for creating or editing a category in the presentation layer of the learning bounded context.
  */
 @Component({
   selector: 'app-category-form',

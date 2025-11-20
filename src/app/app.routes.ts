@@ -9,7 +9,7 @@ const iamRoutes = () => import('./iam/presentation/iam.routes').then(m => m.iamR
 const baseTitle = 'ACME Learning Center';
 
 /**
- * Main routes configuration for the application.
+ * Main routes configuration for the application in the presentation layer.
  */
 export const routes: Routes = [
   { path: 'home',     component:      Home,                         title: `${baseTitle} - Home`  },

@@ -9,7 +9,7 @@ import {SignUpCommand} from '../domain/model/sign-up.command';
 const signUpApiEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderSignUpEndpointPath}`;
 
 /**
- * API endpoint for handling user sign-up operations.
+ * API endpoint for handling user sign-up operations in the infrastructure layer of the IAM bounded context.
  * Extends ErrorHandlingEnabledBaseType for error management.
  */
 export class SignUpApiEndpoint extends ErrorHandlingEnabledBaseType {

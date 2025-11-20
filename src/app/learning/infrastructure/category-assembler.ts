@@ -3,7 +3,7 @@ import {Category} from '../domain/model/category.entity';
 import {CategoriesResponse, CategoryResource} from './categories-response';
 
 /**
- * Assembler for converting between Category entities, CategoryResource resources, and CategoriesResponse.
+ * Assembler for converting between Category entities, CategoryResource resources, and CategoriesResponse in the infrastructure layer of the learning bounded context.
  */
 export class CategoryAssembler implements BaseAssembler<Category, CategoryResource, CategoriesResponse> {
 

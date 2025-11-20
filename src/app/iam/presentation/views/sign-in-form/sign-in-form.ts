@@ -10,7 +10,7 @@ import {SignInCommand} from '../../../domain/model/sign-in.command';
 import {BaseForm} from '../../../../shared/presentation/components/base-form/base-form';
 
 /**
- * Component for the sign-in form view.
+ * Component for the sign-in form view in the presentation layer of the IAM bounded context.
  * Allows users to enter credentials and sign in.
  */
 @Component({

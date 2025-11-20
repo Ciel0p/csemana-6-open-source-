@@ -1,7 +1,7 @@
 import {BaseEntity} from '../../../shared/domain/model/base-entity';
 
 /**
- * Represents a user entity in the system.
+ * Represents a user entity in the domain layer of the IAM bounded context.
  * Implements the BaseEntity interface.
  */
 export class User implements BaseEntity {
