@@ -190,6 +190,7 @@ export class LearningStore {
       next: () => {
         this.categoriesSignal.update(categories => categories.filter(c => c.id !== id));
         this.loadingSignal.set(false);
+        this.errorSignal.set(null);
       },
       error: err => {
         this.errorSignal.set(this.formatError(err, 'Failed to delete category'));
@@ -209,7 +210,10 @@ export class LearningStore {
         console.log(courses);
         this.coursesSignal.set(courses);
         this.loadingSignal.set(false);
+        this.errorSignal.set(null);
         this.assignCategoriesToCourses();
+
+
       },
       error: err => {
         this.errorSignal.set(this.formatError(err, 'Failed to load courses'));
@@ -228,6 +232,7 @@ export class LearningStore {
       next: categories => {
         this.categoriesSignal.set(categories);
         this.loadingSignal.set(false);
+        this.errorSignal.set(null);
       },
       error: err => {
         this.errorSignal.set(this.formatError(err, 'Failed to load categories'));
