@@ -22,6 +22,9 @@ import {MatIcon} from '@angular/material/icon';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 
+/**
+ * Component for displaying a list of courses with pagination and sorting.
+ */
 @Component({
   selector: 'app-course-list',
   imports: [
@@ -52,11 +55,17 @@ export class CourseList implements AfterViewChecked {
   readonly store = inject(LearningStore);
   protected router = inject(Router);
 
+  /**
+   * Columns to display in the table.
+   */
   displayedColumns: string[] = ['id', 'title', 'description', 'category', 'actions'];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  /**
+   * Computed data source for the table.
+   */
   dataSource = computed(() => {
     const source = new MatTableDataSource(this.store.courses());
     source.sort = this.sort;
@@ -64,18 +73,32 @@ export class CourseList implements AfterViewChecked {
     return source;
   });
 
+  /**
+   * Navigates to the edit page for a course.
+   * @param id - The ID of the course to edit.
+   */
   editCourse(id: number) {
     this.router.navigate(['learning/courses', id, 'edit']).then();
   }
 
+  /**
+   * Deletes a course by ID.
+   * @param id - The ID of the course to delete.
+   */
   deleteCourse(id: number) {
     this.store.deleteCourse(id);
   }
 
+  /**
+   * Navigates to the new course form.
+   */
   navigateToNew() {
     this.router.navigate(['learning/courses/new']).then();
   }
 
+  /**
+   * Lifecycle hook to update paginator and sort after view checked.
+   */
   ngAfterViewChecked() {
     if (this.dataSource().paginator !== this.paginator) {
       this.dataSource().paginator = this.paginator;

@@ -2,6 +2,10 @@ import {HttpInterceptorFn} from '@angular/common/http';
 import {inject} from '@angular/core';
 import {IamStore} from '../application/iam.store';
 
+/**
+ * HTTP interceptor for adding authorization headers to requests.
+ * Injects the Bearer token from the IAM store if available.
+ */
 export const iamInterceptor: HttpInterceptorFn = (
   request,
   next) => {

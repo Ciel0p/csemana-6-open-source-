@@ -4,6 +4,10 @@ const courseList = () => import('./views/course-list/course-list').then(m => m.C
 const courseForm = () => import('./views/course-form/course-form').then(m => m.CourseForm);
 const categoryList = () => import('./views/category-list/category-list').then(m => m.CategoryList);
 const categoryForm = () => import('./views/category-form/category-form').then(m => m.CategoryForm);
+
+/**
+ * Routes configuration for the learning module.
+ */
 export const learningRoutes: Routes = [
   { path: 'courses',              loadComponent: courseList },
   { path: 'courses/new',          loadComponent: courseForm },

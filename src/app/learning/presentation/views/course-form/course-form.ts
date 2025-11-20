@@ -9,6 +9,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInput} from '@angular/material/input';
 import {TranslatePipe} from '@ngx-translate/core';
 
+/**
+ * Component for creating or editing a course.
+ */
 @Component({
   selector: 'app-course-form',
   imports: [
@@ -28,15 +31,33 @@ export class CourseForm {
   private router = inject(Router);
   private store = inject(LearningStore);
 
+  /**
+   * Form group for the course form.
+   */
   form = this.fb.group({
     title: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
     description: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
     categoryId: new FormControl<number | null>(null)
   });
+
+  /**
+   * Signal for the list of categories.
+   */
   categories = this.store.categories;
+
+  /**
+   * Indicates if the form is in edit mode.
+   */
   isEdit = false;
+
+  /**
+   * The ID of the course being edited, or null for new courses.
+   */
   courseId: number | null = null;
 
+  /**
+   * Creates an instance of CourseForm and initializes form based on route parameters.
+   */
   constructor() {
     this.route.params.subscribe(params => {
       this.courseId = params['id'] ? +params['id'] : null;
@@ -55,6 +76,9 @@ export class CourseForm {
     });
   }
 
+  /**
+   * Submits the form to create or update the course.
+   */
   submit() {
     if (this.form.invalid) return;
     const course: Course = new Course({

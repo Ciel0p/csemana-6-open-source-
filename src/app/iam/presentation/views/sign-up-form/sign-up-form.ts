@@ -9,6 +9,10 @@ import {Router} from '@angular/router';
 import {IamStore} from '../../../application/iam.store';
 import {SignUpCommand} from '../../../domain/model/sign-up.command';
 
+/**
+ * Component for the sign-up form view.
+ * Allows users to register with username and password.
+ */
 @Component({
   selector: 'app-sign-up-form',
   imports: [
@@ -29,11 +33,17 @@ export class SignUpForm extends BaseForm {
   private router = inject(Router);
   private store = inject(IamStore);
 
+  /**
+   * Form group for the sign-up form.
+   */
   form = new FormGroup({
     username: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
     password: new FormControl('', {nonNullable: true, validators: [Validators.required]})
   });
 
+  /**
+   * Performs the sign-up operation if the form is valid.
+   */
   performSignUp() {
     if (this.form.invalid) return;
     const signUpCommand = new SignUpCommand({

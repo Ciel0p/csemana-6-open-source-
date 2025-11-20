@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {TranslatePipe} from '@ngx-translate/core';
 
+/**
+ * Component for the home page view.
+ */
 @Component({
   selector: 'app-home',
   imports: [TranslatePipe],

@@ -7,6 +7,10 @@ const learningRoutes = () => import('./learning/presentation/learning.routes').t
 const iamRoutes = () => import('./iam/presentation/iam.routes').then(m => m.iamRoutes);
 
 const baseTitle = 'ACME Learning Center';
+
+/**
+ * Main routes configuration for the application.
+ */
 export const routes: Routes = [
   { path: 'home',     component:      Home,                         title: `${baseTitle} - Home`  },
   { path: 'about',    loadComponent:  about,                        title: `${baseTitle} - About`  },

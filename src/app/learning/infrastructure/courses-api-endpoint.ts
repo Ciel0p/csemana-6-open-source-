@@ -10,6 +10,10 @@ import {environment} from '../../../environments/environment';
  * API endpoint for managing courses.
  */
 export class CoursesApiEndpoint extends BaseApiEndpoint<Course, CourseResource, CoursesResponse, CourseAssembler> {
+  /**
+   * Creates an instance of CoursesApiEndpoint.
+   * @param http - The HttpClient to be used for making API requests.
+   */
   constructor(http: HttpClient) {
     super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderCoursesEndpointPath}`, new CourseAssembler());
   }

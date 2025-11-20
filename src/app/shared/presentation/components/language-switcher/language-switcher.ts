@@ -2,6 +2,9 @@ import {Component, inject} from '@angular/core';
 import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
 import {TranslateService} from '@ngx-translate/core';
 
+/**
+ * Component for switching the application's language.
+ */
 @Component({
   selector: 'app-language-switcher',
   imports: [
@@ -12,11 +15,19 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrl: './language-switcher.css'
 })
 export class LanguageSwitcher {
+  /**
+   * The currently selected language code.
+   */
   protected currentLang: string = 'en';
 
-  /** List of available language codes */
+  /**
+   * List of available language codes.
+   */
   protected languages: string[] = ['en', 'es'];
-  /** Translation service instance */
+
+  /**
+   * Translation service instance.
+   */
   private translate: TranslateService;
 
   /**

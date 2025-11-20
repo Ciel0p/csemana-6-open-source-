@@ -9,6 +9,9 @@ import {
   AuthenticationSection
 } from '../../../../iam/presentation/components/authentication-section/authentication-section';
 
+/**
+ * Main layout component that provides the application's navigation structure and common UI elements.
+ */
 @Component({
   selector: 'app-layout',
   imports: [
@@ -27,6 +30,9 @@ import {
   styleUrl: './layout.css'
 })
 export class Layout {
+  /**
+   * Array of navigation options for the application's menu.
+   */
   options = [
     {link: '/home', label: 'option.home'},
     {link: '/about', label: 'option.about'},

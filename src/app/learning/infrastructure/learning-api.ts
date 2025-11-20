@@ -15,6 +15,10 @@ export class LearningApi extends BaseApi {
   private readonly coursesEndpoint:     CoursesApiEndpoint;
   private readonly categoriesEndpoint:  CategoriesApiEndpoint;
 
+  /**
+   * Creates an instance of LearningApi.
+   * @param http - The HttpClient to be used for making API requests.
+   */
   constructor(http: HttpClient) {
     super();
     this.coursesEndpoint =    new CoursesApiEndpoint(http);

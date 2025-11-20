@@ -12,17 +12,48 @@ import {retry} from 'rxjs';
   providedIn: 'root'
 })
 export class LearningStore {
+  /**
+   * Computed signal for the count of courses.
+   */
   readonly courseCount = computed(() => this.courses().length);
+
+  /**
+   * Computed signal for the count of categories.
+   */
   readonly categoryCount = computed(() => this.categories().length);
+
   private readonly coursesSignal = signal<Course[]>([]);
+
+  /**
+   * Readonly signal for the list of courses.
+   */
   readonly courses = this.coursesSignal.asReadonly();
+
   private readonly categoriesSignal = signal<Category[]>([]);
+
+  /**
+   * Readonly signal for the list of categories.
+   */
   readonly categories = this.categoriesSignal.asReadonly();
+
   private readonly loadingSignal = signal<boolean>(false);
+
+  /**
+   * Readonly signal indicating if data is loading.
+   */
   readonly loading = this.loadingSignal.asReadonly();
+
   private readonly errorSignal = signal<string | null>(null);
+
+  /**
+   * Readonly signal for the current error message.
+   */
   readonly error = this.errorSignal.asReadonly();
 
+  /**
+   * Creates an instance of LearningStore and loads initial data.
+   * @param learningApi - The API service for learning data.
+   */
   constructor(private learningApi: LearningApi) {
     this.loadCategories();
     this.loadCourses();
@@ -37,6 +68,11 @@ export class LearningStore {
     return computed(() => id ? this.categories().find(c => c.id === id) : undefined);
   }
 
+  /**
+   * Retrieves a course by its ID as a signal.
+   * @param id - The ID of the course.
+   * @returns A Signal containing the Course object or undefined if not found.
+   */
   getCourseById(id: number): Signal<Course | undefined> {
     return computed(() => id ? this.courses().find(c => c.id === id) : undefined);
   }

@@ -8,6 +8,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {TranslatePipe} from '@ngx-translate/core';
 
+/**
+ * Component for creating or editing a category.
+ */
 @Component({
   selector: 'app-category-form',
   imports: [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, TranslatePipe],
@@ -20,12 +23,26 @@ export class CategoryForm {
   private router = inject(Router);
   private store = inject(LearningStore);
 
+  /**
+   * Form group for the category form.
+   */
   form = this.fb.group({
     name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] })
   });
+
+  /**
+   * Indicates if the form is in edit mode.
+   */
   isEdit = false;
+
+  /**
+   * The ID of the category being edited, or null for new categories.
+   */
   categoryId: number | null = null;
 
+  /**
+   * Creates an instance of CategoryForm and initializes form based on route parameters.
+   */
   constructor() {
     this.route.params.subscribe(params => {
       this.categoryId = params['id'] ? +params['id'] : null;
@@ -40,6 +57,9 @@ export class CategoryForm {
     });
   }
 
+  /**
+   * Submits the form to create or update the category.
+   */
   submit() {
     if (this.form.invalid) return;
 
