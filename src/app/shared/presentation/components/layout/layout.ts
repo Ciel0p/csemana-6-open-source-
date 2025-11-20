@@ -10,7 +10,7 @@ import {
 } from '../../../../iam/presentation/components/authentication-section/authentication-section';
 
 /**
- * Main layout component that provides the application's navigation structure and common UI elements in the presentation layer of the shared bounded context.
+ * Main layout Component that provides the application's navigation structure and common UI elements in the presentation layer of the shared bounded context.
  */
 @Component({
   selector: 'app-layout',

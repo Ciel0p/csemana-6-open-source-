@@ -11,7 +11,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
 
 /**
- * Component for displaying a list of categories with pagination and sorting in the presentation layer of the learning bounded context.
+ * Component for displaying a list of categories with pagination and sorting in the presentation layer of the 'learning' bounded context.
  */
 @Component({
   selector: 'app-category-list',

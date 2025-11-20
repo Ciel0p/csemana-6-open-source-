@@ -34,7 +34,7 @@ export class SignInForm extends BaseForm {
   private store = inject(IamStore);
 
   /**
-   * Form group for the sign-in form.
+   * Form-group for the sign-in form.
    */
   form = new FormGroup({
     username: new FormControl('', {nonNullable: true, validators: [Validators.required]}),

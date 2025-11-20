@@ -10,7 +10,7 @@ import {MatInput} from '@angular/material/input';
 import {TranslatePipe} from '@ngx-translate/core';
 
 /**
- * Component for creating or editing a course in the presentation layer of the learning bounded context.
+ * Component for creating or editing a course in the presentation layer of the 'learning' bounded context.
  */
 @Component({
   selector: 'app-course-form',
@@ -32,7 +32,7 @@ export class CourseForm {
   private store = inject(LearningStore);
 
   /**
-   * Form group for the course form.
+   * Form-group for the course form.
    */
   form = this.fb.group({
     title: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
@@ -56,7 +56,7 @@ export class CourseForm {
   courseId: number | null = null;
 
   /**
-   * Creates an instance of CourseForm and initializes form based on route parameters.
+   * Creates an instance of CourseForm and initializes the form based on route parameters.
    */
   constructor() {
     this.route.params.subscribe(params => {

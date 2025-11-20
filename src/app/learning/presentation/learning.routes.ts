@@ -6,7 +6,7 @@ const categoryList = () => import('./views/category-list/category-list').then(m 
 const categoryForm = () => import('./views/category-form/category-form').then(m => m.CategoryForm);
 
 /**
- * Routes configuration for the learning bounded context in the presentation layer.
+ * Routes configuration for the 'learning' bounded context in the presentation layer.
  */
 export const learningRoutes: Routes = [
   { path: 'courses',              loadComponent: courseList },

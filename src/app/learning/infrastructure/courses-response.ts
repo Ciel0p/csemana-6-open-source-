@@ -1,7 +1,7 @@
 import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-response';
 
 /**
- * Represents a single course resource returned from the API in the infrastructure layer of the learning bounded context.
+ * Represents a single course resource returned from the API in the infrastructure layer of the 'learning' bounded context.
  *
  * @remarks
  * This interface extends {@link BaseResource} and includes the core properties of a course.
@@ -31,7 +31,7 @@ export interface CourseResource extends BaseResource {
 }
 
 /**
- * Represents the response structure for a list of courses from the API in the infrastructure layer of the learning bounded context.
+ * Represents the response structure for a list of courses from the API in the infrastructure layer of the 'learning' bounded context.
  *
  * @remarks
  * This interface extends {@link BaseResponse} and contains an array of {@link CourseResource} objects.

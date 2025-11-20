@@ -11,7 +11,7 @@ import {SignUpCommand} from '../../../domain/model/sign-up.command';
 
 /**
  * Component for the sign-up form view in the presentation layer of the IAM bounded context.
- * Allows users to register with username and password.
+ * Allows users to register with a username and password.
  */
 @Component({
   selector: 'app-sign-up-form',
@@ -34,7 +34,7 @@ export class SignUpForm extends BaseForm {
   private store = inject(IamStore);
 
   /**
-   * Form group for the sign-up form.
+   * Form-group for the sign-up form.
    */
   form = new FormGroup({
     username: new FormControl('', {nonNullable: true, validators: [Validators.required]}),

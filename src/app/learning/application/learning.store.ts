@@ -6,7 +6,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {retry} from 'rxjs';
 
 /**
- * Application service store for managing learning state in the learning bounded context.
+ * Application service store for managing learning state in the 'learning' bounded context.
  * Handles courses and categories using Angular signals.
  */
 @Injectable({

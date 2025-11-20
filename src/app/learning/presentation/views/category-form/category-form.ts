@@ -9,7 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {TranslatePipe} from '@ngx-translate/core';
 
 /**
- * Component for creating or editing a category in the presentation layer of the learning bounded context.
+ * Component for creating or editing a category in the presentation layer of the 'learning' bounded context.
  */
 @Component({
   selector: 'app-category-form',
@@ -41,7 +41,7 @@ export class CategoryForm {
   categoryId: number | null = null;
 
   /**
-   * Creates an instance of CategoryForm and initializes form based on route parameters.
+   * Creates an instance of CategoryForm and initializes the form based on route parameters.
    */
   constructor() {
     this.route.params.subscribe(params => {

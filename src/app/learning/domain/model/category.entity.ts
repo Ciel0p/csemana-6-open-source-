@@ -1,7 +1,7 @@
 import {BaseEntity} from '../../../shared/infrastructure/base-entity';
 
 /**
- * Represents a Category entity in the domain layer of the learning bounded context.
+ * Represents a Category entity in the domain layer of the 'learning' bounded context.
  * @remarks
  * This class is used as a domain model for categories in the learning context.
  * It implements the BaseEntity interface to ensure consistency across entities.

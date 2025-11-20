@@ -8,7 +8,7 @@ import {CategoriesApiEndpoint} from './categories-api-endpoint';
 import {Observable} from 'rxjs';
 
 /**
- * API service for managing endpoints in the learning bounded context in the infrastructure layer.
+ * API service for managing endpoints in the 'learning' bounded context in the infrastructure layer.
  * Handles courses and categories through dedicated endpoints.
  */
 @Injectable({providedIn: 'root'})
