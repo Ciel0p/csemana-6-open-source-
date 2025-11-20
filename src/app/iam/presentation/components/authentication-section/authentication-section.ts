@@ -1,7 +1,6 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {IamStore} from '../../../application/iam.store';
-import {User} from '../../../domain/model/user.entity';
 import {MatButton} from '@angular/material/button';
 
 @Component({
