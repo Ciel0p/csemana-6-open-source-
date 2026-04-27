@@ -1,66 +1,142 @@
-# ACME Learning Center Application (learning-center)
+# ACME Learning Center Application (`learning-center`)
 
 ## Overview
-LearningCenter is a modular, domain-driven Angular application for managing learning resources, such as courses and categories. It is designed with the best practices in architecture, maintainability, and scalability in mind.
+`learning-center` is an Angular 21 client application for managing learning information in the ACME Learning Center domain. The current implementation focuses on maintaining categories and courses, with the codebase organized around bounded contexts and layered responsibilities.
+
+In development mode, the application consumes a local fake API exposed through `json-server`. The frontend is configured to call `http://localhost:3000/api/v1` for learning resources.
 
 ## Features
-- Category and course management
-- Language switching (English/Spanish) using ngx-translate
-- Error handling and robust navigation
-- Modular bounded contexts (Learning, Shared)
-- Domain-driven design with clear separation of layers
-- Responsive UI and component-based structure
-- Angular Routing for navigation between views
-- HTTP communication using Angular HttpClient
+- Category maintenance with create, read, update, and delete behavior
+- Course maintenance with create, read, update, and delete behavior
+- Course-to-category association through category selection
+- Internationalization with English and Spanish resources using `ngx-translate`
+- Client-side navigation with Angular Router
+- HTTP communication through Angular `HttpClient`
+- Angular Material-based presentation components
+- Layered organization by bounded context:
+  - `learning`
+  - `iam`
+  - `shared`
+
+## Current Scope
+The currently enabled application routes expose:
+- `home`
+- `about`
+- `learning/categories`
+- `learning/courses`
+
+The codebase also contains an `iam` bounded context, including routes, store, interceptor, and endpoint classes. However, IAM routes are currently not enabled in `src/app/app.routes.ts`, so authentication is present in the codebase but not active in the running application.
+
+## Architecture Overview
+The application structure follows bounded contexts and layers under `src/app`:
+
+- `learning`
+  - `domain`
+  - `application`
+  - `infrastructure`
+  - `presentation`
+- `iam`
+  - `domain`
+  - `application`
+  - `infrastructure`
+  - `presentation`
+- `shared`
+  - `domain`
+  - `infrastructure`
+  - `presentation`
+
+This structure helps keep domain concepts, API integration, application state, and UI concerns clearly separated.
 
 ## Technologies
-- Angular CLI v21
-- Angular Framework
-- Angular Routing
-- Angular HttpClient
-- RxJS
-- Angular Material
-- ngx-translate
+- Angular 21
 - TypeScript
-- PlantUML (for architecture diagrams)
-- json-server (for local API simulation)
+- RxJS
+- Angular Router
+- Angular `HttpClient`
+- Angular Material
+- `ngx-translate`
+- `json-server`
+- PlantUML
 
-## User Stories
-For a detailed description of the application's functional requirements, please review the [docs/user-stories.md](docs/user-stories.md) file.
+## Documentation
+### User Stories
+Functional requirements are documented in [`docs/user-stories.md`](docs/user-stories.md).
 
-## Class Diagram
-The application's architecture and relationships are documented in the [docs/class-diagram.puml](docs/class-diagram.puml) file. Review this diagram for a visual overview of the domain-driven design and package structure.
+### Class Diagram
+The class diagram is available in [`docs/class-diagram.puml`](docs/class-diagram.puml).
+
+## Prerequisites
+Before running the project, make sure the environment includes:
+- Node.js
+- npm
 
 ## Installation
-To install dependencies, run:
+Install project dependencies from the project root:
 
 ```bash
 npm install
 ```
 
-## Running
-To start a local development server, run:
+## Running the Application
+Start the Angular development server from the project root:
 
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+This starts the application at:
 
-## Starting the Fake API (json-server)
-This project uses [json-server](https://github.com/typicode/json-server) to simulate a backend API for development and testing. Configuration files are located in the `/server` folder.
+- `http://localhost:4200/`
 
-To start the fake API server, run:
+## Starting the Fake API
+The development environment is configured to consume the fake API at:
+
+- `http://localhost:3000/api/v1`
+
+The fake API configuration files are located in the `server` folder:
+- `server/db.json`
+- `server/routes.json`
+- `server/start.sh`
+
+### Option 1: Start from the project root
 
 ```bash
 npx json-server --watch server/db.json --routes server/routes.json --port 3000
 ```
 
-Or use the provided script:
+### Option 2: Use the provided script
+The provided script uses relative paths, so it should be executed from inside the `server` directory:
 
 ```bash
-sh server/start.sh
+cd server
+sh start.sh
 ```
 
-The API will be available at `http://localhost:3000/`.
+## Development Workflow
+For local development, start the fake API first and then start the Angular application:
+
+```bash
+npx json-server --watch server/db.json --routes server/routes.json --port 3000
+npm start
+```
+
+## Available Scripts
+From the project root, the following scripts are available:
+
+```bash
+npm start
+npm run build
+npm run watch
+npm test
+```
+
+## Fake API Notes
+- The fake API currently provides learning resources for `categories` and `courses`.
+- The development environment maps `/api/v1/*` requests through `server/routes.json`.
+- IAM endpoint paths exist in the environment configuration, but they are not currently backed by the fake API data in `server/db.json`.
+
+## Project Notes
+- Translation files are located in `public/i18n/`.
+- The development API base URL is defined in `src/environments/environment.development.ts`.
+- The production environment file points to `http://localhost:8080/api/v1`, which may require adjustment for a real deployment target.
 
