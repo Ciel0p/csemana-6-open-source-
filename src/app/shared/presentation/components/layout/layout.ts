@@ -5,9 +5,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {TranslatePipe} from '@ngx-translate/core';
 import {LanguageSwitcher} from '../language-switcher/language-switcher';
 import {FooterContent} from '../footer-content/footer-content';
+/**
 import {
   AuthenticationSection
 } from '../../../../iam/presentation/components/authentication-section/authentication-section';
+**/
 
 /**
  * Main layout Component that provides the application's navigation structure and common UI elements in the presentation layer of the shared bounded context.
