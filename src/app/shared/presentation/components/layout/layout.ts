@@ -12,7 +12,7 @@ import {
 **/
 
 /**
- * Main layout Component that provides the application's navigation structure and common UI elements in the presentation layer of the shared bounded context.
+ * Main shell component that hosts top-level navigation and routed content.
  */
 @Component({
   selector: 'app-layout',

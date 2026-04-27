@@ -2,14 +2,13 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 
 /**
- * Abstract base class providing error handling utilities for infrastructure services.
+ * Provides reusable HTTP error translation for infrastructure services.
  */
 export abstract class ErrorHandlingEnabledBaseType {
   /**
-   * Handles HTTP errors and returns an Observable that emits an error message.
-   * @param operation - The name of the operation that failed.
-   * @returns A function that takes an HttpErrorResponse and returns an Observable that emits an error message.
-   * @protected
+   * Creates an operation-specific HTTP error handler.
+   * @param operation - Name of the failed operation.
+   * @returns Function that transforms an {@link HttpErrorResponse} into a failed observable.
    */
   protected handleError(operation: string) {
     return (error: HttpErrorResponse): Observable<never> => {

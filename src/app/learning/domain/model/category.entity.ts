@@ -1,21 +1,16 @@
 import {BaseEntity} from '../../../shared/infrastructure/base-entity';
 
 /**
- * Represents a Category entity in the domain layer of the 'learning' bounded context.
- * @remarks
- * This class is used as a domain model for categories in the learning context.
- * It implements the BaseEntity interface to ensure consistency across entities.
- * @see {@link BaseEntity}
+ * Represents a course category in the learning domain model.
  */
 export class Category implements BaseEntity {
   /**
-   * Creates a new Category instance.
-   * @param category - An object containing the id and name of the category.
-   * @returns A new instance of Category.
+   * Creates a new category entity.
+   * @param props - Initialization values.
    */
-  constructor(category: { id: number; name: string }) {
-    this._id = category.id;
-    this._name = category.name;
+  constructor(props: { id: number; name: string }) {
+    this._id = props.id;
+    this._name = props.name;
   }
 
   /**

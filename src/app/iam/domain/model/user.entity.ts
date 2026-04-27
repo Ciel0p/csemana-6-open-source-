@@ -1,8 +1,7 @@
 import {BaseEntity} from '../../../shared/domain/model/base-entity';
 
 /**
- * Represents a user entity in the domain layer of the IAM bounded context.
- * Implements the BaseEntity interface.
+ * Represents an authenticated account in the IAM domain model.
  */
 export class User implements BaseEntity {
   /**
@@ -41,11 +40,11 @@ export class User implements BaseEntity {
   private _username: string;
 
   /**
-   * Creates a new User instance.
-   * @param user An object containing the user's ID and username.
+   * Creates a new user entity.
+   * @param props - Immutable initialization values.
    */
-  constructor(user:{id: number, username: string}) {
-    this._id = user.id;
-    this._username = user.username;
+  constructor(props:{id: number, username: string}) {
+    this._id = props.id;
+    this._username = props.username;
   }
 }

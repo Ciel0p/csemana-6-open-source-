@@ -1,6 +1,5 @@
 /**
- * Command object for user sign-up operations in the domain layer of the IAM bounded context.
- * Contains the username and password for registration.
+ * Captures credentials required to register a new IAM account.
  */
 export class SignUpCommand {
   /**
@@ -38,11 +37,11 @@ export class SignUpCommand {
   private _password: string;
 
   /**
-   * Creates a new SignUpCommand instance.
-   * @param resource An object containing username and password.
+   * Creates a new command instance.
+   * @param props - Credential values for sign-up.
    */
-  constructor(resource: {username: string, password: string}) {
-    this._username = resource.username;
-    this._password = resource.password;
+  constructor(props: {username: string, password: string}) {
+    this._username = props.username;
+    this._password = props.password;
   }
 }

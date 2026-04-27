@@ -7,7 +7,7 @@ import {environment} from '../../../environments/environment';
 
 
 /**
- * API endpoint for managing courses in the infrastructure layer of the 'learning' bounded context.
+ * Endpoint client for course CRUD operations.
  */
 export class CoursesApiEndpoint extends BaseApiEndpoint<Course, CourseResource, CoursesResponse, CourseAssembler> {
   /**

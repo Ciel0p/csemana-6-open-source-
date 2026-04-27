@@ -1,5 +1,5 @@
 /**
- * Defines a standard structure for entities with a unique identifier in the infrastructure layer.
+ * Shared shape for infrastructure-side entity representations keyed by identifier.
  */
 export interface BaseEntity {
   /**

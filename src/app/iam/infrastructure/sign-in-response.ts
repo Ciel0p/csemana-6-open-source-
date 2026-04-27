@@ -1,8 +1,7 @@
 import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-response';
 
 /**
- * Resource interface for sign-in operations.
- * Represents the data returned after a successful sign-in, including authentication token.
+ * Resource returned by the sign-in endpoint.
  */
 export interface SignInResource extends BaseResource {
   id: number;
@@ -11,7 +10,6 @@ export interface SignInResource extends BaseResource {
 }
 
 /**
- * Response interface for sign-in API calls.
- * Extends BaseResponse and SignInResource.
+ * Response shape returned by the sign-in endpoint.
  */
 export interface SignInResponse extends BaseResponse, SignInResource {}

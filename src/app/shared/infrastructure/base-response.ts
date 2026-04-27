@@ -1,10 +1,10 @@
 /**
- * Abstract interface for API response structures in the infrastructure layer.
+ * Marker interface for HTTP response envelopes returned by API endpoints.
  */
 export interface BaseResponse {}
 
 /**
- * Defines a standard structure for API resources with a unique identifier in the infrastructure layer.
+ * Base contract for API resources that expose a numeric identifier.
  */
 export interface BaseResource {
   /**

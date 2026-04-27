@@ -3,7 +3,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {TranslateService} from '@ngx-translate/core';
 
 /**
- * Component for switching the application's language in the presentation layer of the shared bounded context.
+ * Switches the active locale used by the translation service.
  */
 @Component({
   selector: 'app-language-switcher',

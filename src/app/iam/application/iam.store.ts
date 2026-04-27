@@ -6,8 +6,7 @@ import {IamApi} from '../infrastructure/iam-api';
 import {SignUpCommand} from '../domain/model/sign-up.command';
 
 /**
- * Application service store for managing Identity and Access Management state in the IAM bounded context.
- * Handles user authentication, sign-in, sign-up, and user data.
+ * Holds IAM application state and orchestrates authentication flows.
  */
 @Injectable({providedIn: 'root'})
 export class IamStore {
@@ -62,9 +61,9 @@ export class IamStore {
   }
 
   /**
-   * Signs in a user with the provided credentials.
-   * @param signInCommand The sign-in command.
-   * @param router The router for navigation.
+   * Executes sign-in and updates authentication state.
+   * @param signInCommand - Credentials command.
+   * @param router - Router used for post-auth navigation.
    */
   signIn(signInCommand: SignInCommand, router: Router) {
     console.log(signInCommand);
@@ -87,9 +86,9 @@ export class IamStore {
   }
 
   /**
-   * Signs up a new user.
-   * @param signUpCommand The sign-up command.
-   * @param router The router for navigation.
+   * Executes sign-up and routes to the sign-in flow on success.
+   * @param signUpCommand - Registration command.
+   * @param router - Router used for post-sign-up navigation.
    */
   signUp(signUpCommand: SignUpCommand, router: Router) {
     this.iamApi.signUp(signUpCommand).subscribe({
@@ -108,8 +107,8 @@ export class IamStore {
   }
 
   /**
-   * Signs out the current user.
-   * @param router The router for navigation.
+   * Clears local authentication state and redirects to sign-in.
+   * @param router - Router used for sign-out navigation.
    */
   signOut(router: Router) {
     localStorage.removeItem('token');
@@ -120,7 +119,10 @@ export class IamStore {
   }
 
   /**
-   * Loads the list of users.
+   * Starts loading users into store state.
+   *
+   * @remarks
+   * The query implementation is pending.
    */
   loadUsers() {
     this.loadingUsers.set(true);

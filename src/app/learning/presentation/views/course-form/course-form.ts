@@ -10,7 +10,7 @@ import {MatInput} from '@angular/material/input';
 import {TranslatePipe} from '@ngx-translate/core';
 
 /**
- * Component for creating or editing a course in the presentation layer of the 'learning' bounded context.
+ * Creates and edits course entities.
  */
 @Component({
   selector: 'app-course-form',

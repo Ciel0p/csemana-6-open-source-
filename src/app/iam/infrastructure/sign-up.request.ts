@@ -1,8 +1,9 @@
 /**
- * Request interface for sign-up API calls in the infrastructure layer of the IAM bounded context.
- * Contains the necessary data to register a new user.
+ * Resource payload sent to the sign-up endpoint.
  */
 export interface SignUpRequest{
+  /** Username for the new account. */
   username: string;
+  /** Raw password for the new account. */
   password: string;
 }

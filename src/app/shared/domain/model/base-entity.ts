@@ -1,5 +1,5 @@
 /**
- * Abstract base entity interface that all domain entities should extend.
+ * Minimal contract implemented by domain entities across bounded contexts.
  */
 export interface BaseEntity {
   /**

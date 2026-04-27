@@ -1,6 +1,5 @@
 /**
- * Command object for user sign-in operations in the domain layer of the IAM bounded context.
- * Contains the username and password for authentication.
+ * Captures credentials required to authenticate in the IAM context.
  */
 export class SignInCommand {
   /**
@@ -38,11 +37,11 @@ export class SignInCommand {
   private _password: string;
 
   /**
-   * Creates a new SignInCommand instance.
-   * @param resource An object containing username and password.
+   * Creates a new command instance.
+   * @param props - Credential values for sign-in.
    */
-  constructor(resource: {username: string, password: string}) {
-    this._username = resource.username;
-    this._password = resource.password;
+  constructor(props: {username: string, password: string}) {
+    this._username = props.username;
+    this._password = props.password;
   }
 }

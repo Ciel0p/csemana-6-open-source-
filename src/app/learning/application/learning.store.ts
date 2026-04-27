@@ -6,8 +6,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {retry} from 'rxjs';
 
 /**
- * Application service store for managing learning state in the 'learning' bounded context.
- * Handles courses and categories using Angular signals.
+ * Holds learning application state and coordinates course/category application layer behavior.
  */
 @Injectable({
   providedIn: 'root'
@@ -61,18 +60,18 @@ export class LearningStore {
   }
 
   /**
-   * Retrieves a category by its ID as a signal.
-   * @param id - The ID of the category.
-   * @returns A Signal containing the Category object or undefined if not found.
+   * Selects a category by identifier.
+   * @param id - Category identifier.
+   * @returns Reactive selection for the requested category.
    */
   getCategoryById(id: number): Signal<Category | undefined> {
     return computed(() => id ? this.categories().find(c => c.id === id) : undefined);
   }
 
   /**
-   * Retrieves a course by its ID as a signal.
-   * @param id - The ID of the course.
-   * @returns A Signal containing the Course object or undefined if not found.
+   * Selects a course by identifier.
+   * @param id - Course identifier.
+   * @returns Reactive selection for the requested course.
    */
   getCourseById(id: number): Signal<Course | undefined> {
     return computed(() => id ? this.courses().find(c => c.id === id) : undefined);
@@ -252,10 +251,10 @@ export class LearningStore {
   }
 
   /**
-   * Formats error messages for user-friendly display.
-   * @param error - The error object.
-   * @param fallback - The fallback error message.
-   * @returns A formatted error message.
+   * Normalizes unknown errors into a display-friendly message.
+   * @param error - Source error.
+   * @param fallback - Default message when details are unavailable.
+   * @returns Normalized message.
    */
   private formatError(error: any, fallback: string): string {
     if (error instanceof Error) {

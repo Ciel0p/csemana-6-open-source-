@@ -7,7 +7,7 @@ import {environment} from '../../../environments/environment';
 
 
 /**
- * API endpoint for managing categories in the infrastructure layer of the 'learning' bounded context.
+ * Endpoint client for category CRUD operations.
  */
 export class CategoriesApiEndpoint extends BaseApiEndpoint<Category, CategoryResource, CategoriesResponse, CategoryAssembler> {
   /**

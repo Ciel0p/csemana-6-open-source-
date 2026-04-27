@@ -8,8 +8,7 @@ import {CategoriesApiEndpoint} from './categories-api-endpoint';
 import {Observable} from 'rxjs';
 
 /**
- * API service for managing endpoints in the 'learning' bounded context in the infrastructure layer.
- * Handles courses and categories through dedicated endpoints.
+ * Infrastructure facade for course and category endpoint operations.
  */
 @Injectable({providedIn: 'root'})
 export class LearningApi extends BaseApi {
@@ -27,8 +26,8 @@ export class LearningApi extends BaseApi {
   }
 
   /**
-   * Retrieves all courses from the API.
-   * @returns An Observable for an array of Course objects.
+   * Retrieves all courses.
+   * @returns Stream with the course collection.
    */
   getCourses(): Observable<Course[]> {
     return this.coursesEndpoint.getAll();
@@ -71,8 +70,8 @@ export class LearningApi extends BaseApi {
   }
 
   /**
-   * Retrieves all categories from the API.
-   * @returns An Observable for an array of Category objects.
+   * Retrieves all categories.
+   * @returns Stream with the category collection.
    */
   getCategories(): Observable<Category[]> {
     return this.categoriesEndpoint.getAll();

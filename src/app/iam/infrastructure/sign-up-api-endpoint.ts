@@ -9,8 +9,7 @@ import {SignUpCommand} from '../domain/model/sign-up.command';
 const signUpApiEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderSignUpEndpointPath}`;
 
 /**
- * API endpoint for handling user sign-up operations in the infrastructure layer of the IAM bounded context.
- * Extends ErrorHandlingEnabledBaseType for error management.
+ * Encapsulates IAM sign-up HTTP operations.
  */
 export class SignUpApiEndpoint extends ErrorHandlingEnabledBaseType {
   /**
@@ -23,9 +22,9 @@ export class SignUpApiEndpoint extends ErrorHandlingEnabledBaseType {
   }
 
   /**
-   * Performs the sign-up operation by sending a POST request.
-   * @param signUpCommand The sign-up command containing user details.
-   * @returns An Observable of the sign-up resource.
+   * Registers a new user in the remote IAM endpoint.
+   * @param signUpCommand - Command containing sign-up credentials.
+   * @returns Stream with the created user resource.
    */
   signUp(signUpCommand: SignUpCommand): Observable<SignUpResource> {
     const signUpRequest = this.assembler.toRequestFromCommand(signUpCommand);

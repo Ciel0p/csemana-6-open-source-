@@ -3,13 +3,13 @@ import {SignInCommand} from '../domain/model/sign-in.command';
 import {SignInRequest} from './sign-in.request';
 
 /**
- * Assembler for converting between sign-in commands, requests, and responses in the infrastructure layer of the IAM bounded context.
+ * Maps IAM sign-in commands and endpoint payloads.
  */
 export class SignInAssembler {
   /**
-   * Converts a sign-in response to a sign-in resource.
-   * @param response The response from the API.
-   * @returns The assembled sign-in resource.
+   * Converts the endpoint response into an application-level resource.
+   * @param response - Raw response returned by the sign-in endpoint.
+   * @returns Mapped sign-in resource.
    */
   toResourceFromResponse(response: SignInResponse): SignInResource {
     return {
@@ -20,9 +20,9 @@ export class SignInAssembler {
   }
 
   /**
-   * Converts a sign-in command to a sign-in request.
-   * @param command The sign-in command.
-   * @returns The assembled sign-in request.
+   * Converts a sign-in command into the request payload expected by the API.
+   * @param command - Domain command with credentials.
+   * @returns Mapped request payload.
    */
   toRequestFromCommand(command: SignInCommand): SignInRequest {
     return {

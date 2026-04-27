@@ -4,7 +4,7 @@ import {MatButton} from '@angular/material/button';
 import {TranslatePipe} from '@ngx-translate/core';
 
 /**
- * Component for displaying a page not found error view in the presentation layer of the shared bounded context.
+ * Displays fallback content for unknown routes.
  */
 @Component({
   selector: 'app-page-not-found',

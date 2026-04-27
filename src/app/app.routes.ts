@@ -11,7 +11,7 @@ const iamRoutes = () => import('./iam/presentation/iam.routes').then(m => m.iamR
 const baseTitle = 'ACME Learning Center';
 
 /**
- * Main routes configuration for the application in the presentation layer.
+ * Root route configuration that composes bounded-context routes.
  */
 /*
 // IAM-enabled Routes version to replace when IAM is implemented

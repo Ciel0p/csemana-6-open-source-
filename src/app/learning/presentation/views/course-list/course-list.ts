@@ -23,7 +23,7 @@ import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 
 /**
- * Component for displaying a list of courses with pagination and sorting in the presentation layer of the 'learning' bounded context.
+ * Displays the course collection with table actions.
  */
 @Component({
   selector: 'app-course-list',

@@ -12,8 +12,7 @@ import {SignInCommand} from '../domain/model/sign-in.command';
 import {SignInResource} from './sign-in-response';
 
 /**
- * API service for Identity and Access Management operations in the infrastructure layer of the IAM bounded context.
- * Handles user sign-up and sign-in through dedicated endpoints.
+ * Infrastructure facade that exposes IAM endpoint operations.
  */
 @Injectable({providedIn: 'root'})
 export class IamApi extends BaseApi {
@@ -32,18 +31,18 @@ export class IamApi extends BaseApi {
   }
 
   /**
-   * Signs up a new user.
-   * @param signUpCommand The sign-up command containing user details.
-   * @returns An Observable of the sign-up response.
+   * Registers a new user account.
+   * @param signUpCommand - Command containing credential values.
+   * @returns Stream with the created user resource.
    */
   signUp(signUpCommand: SignUpCommand): Observable<SignUpResource>  {
     return this.signUpEndpoint.signUp(signUpCommand);
   }
 
   /**
-   * Signs in an existing user.
-   * @param signInCommand The sign-in command containing credentials.
-   * @returns An Observable of the sign-in response.
+   * Authenticates an existing user.
+   * @param signInCommand - Command containing credential values.
+   * @returns Stream with the authenticated user resource and token.
    */
   signIn(signInCommand: SignInCommand): Observable<SignInResource> {
     return this.signInEndpoint.signIn(signInCommand);

@@ -1,8 +1,7 @@
 import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-response';
 
 /**
- * Resource interface for sign-up operations in the infrastructure layer of the IAM bounded context.
- * Represents the data returned after a successful sign-up.
+ * Resource returned by the sign-up endpoint.
  */
 export interface SignUpResource extends BaseResource {
   id: number;
@@ -10,7 +9,6 @@ export interface SignUpResource extends BaseResource {
 }
 
 /**
- * Response interface for sign-up API calls in the infrastructure layer of the IAM bounded context.
- * Extends BaseResponse and SignUpResource.
+ * Response shape returned by the sign-up endpoint.
  */
 export interface SignUpResponse extends BaseResponse, SignUpResource {}

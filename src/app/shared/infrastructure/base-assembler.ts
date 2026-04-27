@@ -2,11 +2,11 @@ import {BaseResource, BaseResponse} from './base-response';
 import {BaseEntity} from './base-entity';
 
 /**
- * Defines a contract for assembler classes that convert between domain entities, API resources, and responses in the infrastructure layer.
+ * Defines conversions between domain entities and API representations.
  *
- * @template TEntity - The entity type (e.g., Course) must extend BaseEntity.
- * @template TResource - The resource type, must extend BaseResource.
- * @template TResponse - The response type, must extend BaseResponse.
+ * @typeParam TEntity - Domain entity type.
+ * @typeParam TResource - Resource type exchanged with endpoint operations.
+ * @typeParam TResponse - Response envelope type returned by collection queries.
  */
 export interface BaseAssembler<TEntity extends BaseEntity, TResource extends BaseResource, TResponse extends BaseResponse> {
   /**
@@ -24,9 +24,9 @@ export interface BaseAssembler<TEntity extends BaseEntity, TResource extends Bas
   toResourceFromEntity(entity: TEntity): TResource;
 
   /**
-   * Converts an API response to an array of entities.
-   * @param response - The API response containing entities.
-   * @returns An array of entities.
+   * Converts a response envelope into a collection of domain entities.
+   * @param response - Response payload returned by the API.
+   * @returns Array of mapped domain entities.
    */
   toEntitiesFromResponse(response: TResponse): TEntity[];
 }

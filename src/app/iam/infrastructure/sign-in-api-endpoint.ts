@@ -9,8 +9,7 @@ import {ErrorHandlingEnabledBaseType} from '../../shared/infrastructure/error-ha
 const signInApiEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderSignInEndpointPath}`;
 
 /**
- * API endpoint for handling user sign-in operations in the infrastructure layer of the IAM bounded context.
- * Extends ErrorHandlingEnabledBaseType for error management.
+ * Encapsulates IAM sign-in HTTP operations.
  */
 export class SignInApiEndpoint extends ErrorHandlingEnabledBaseType {
   /**
@@ -23,9 +22,9 @@ export class SignInApiEndpoint extends ErrorHandlingEnabledBaseType {
   }
 
   /**
-   * Performs the sign-in operation by sending a POST request.
-   * @param signInCommand The sign-in command containing user credentials.
-   * @returns An Observable of the sign-in resource.
+   * Authenticates a user with the remote IAM endpoint.
+   * @param signInCommand - Command containing username and password.
+   * @returns Stream with the authenticated user resource and access token.
    */
   signIn(signInCommand: SignInCommand): Observable<SignInResource> {
     const signInRequest = this.assembler.toRequestFromCommand(signInCommand);

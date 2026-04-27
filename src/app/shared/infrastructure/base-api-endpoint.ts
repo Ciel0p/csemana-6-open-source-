@@ -6,12 +6,12 @@ import {BaseResource, BaseResponse} from './base-response';
 import {BaseAssembler} from './base-assembler';
 
 /**
- * Base class for API endpoint operations with generic CRUD functionality in the infrastructure layer.
+ * Provides generic CRUD operations for a single REST endpoint.
  *
- * @template TEntity - The entity type, which must extend BaseEntity.
- * @template TResource - The resource type, must extend BaseResource.
- * @template TResponse - The response type, must extend BaseResponse.
- * @template TAssembler - The assembler type implementing BaseAssembler with matching generics.
+ * @typeParam TEntity - Domain entity handled by the endpoint.
+ * @typeParam TResource - Resource representation exchanged with the API.
+ * @typeParam TResponse - Response envelope returned for collection queries.
+ * @typeParam TAssembler - Mapper that translates between entities and resources.
  */
 export abstract class BaseApiEndpoint<
   TEntity extends BaseEntity,
@@ -26,8 +26,8 @@ export abstract class BaseApiEndpoint<
   ) {}
 
   /**
-   * Retrieves all entities from the API, handling both response objects and arrays.
-   * @returns An Observable for an array of entities.
+   * Fetches all entities from the configured endpoint.
+   * @returns Stream with the mapped entity collection.
    */
   getAll(): Observable<TEntity[]> {
     return this.http.get<TResponse | TResource[]>(this.endpointUrl).pipe(
@@ -43,9 +43,9 @@ export abstract class BaseApiEndpoint<
   }
 
   /**
-   * Retrieves a single entity by ID.
-   * @param id - The ID of the entity.
-   * @returns An Observable of the entity.
+   * Fetches a single entity by identifier.
+   * @param id - Entity identifier.
+   * @returns Stream with the mapped entity.
    */
   getById(id: number): Observable<TEntity> {
     return this.http.get<TResource>(`${this.endpointUrl}/${id}`).pipe(
@@ -55,9 +55,9 @@ export abstract class BaseApiEndpoint<
   }
 
   /**
-   * Creates a new entity.
-   * @param entity - The entity to create.
-   * @returns An Observable of the created entity.
+   * Creates a new entity in the remote endpoint.
+   * @param entity - Entity to persist.
+   * @returns Stream with the created entity returned by the API.
    */
   create(entity: TEntity): Observable<TEntity> {
     const resource = this.assembler.toResourceFromEntity(entity);
@@ -69,9 +69,9 @@ export abstract class BaseApiEndpoint<
 
   /**
    * Updates an existing entity.
-   * @param entity - The entity to update.
-   * @param id - The ID of the entity.
-   * @returns An Observable of the updated entity.
+   * @param entity - Entity state to persist.
+   * @param id - Identifier of the target entity.
+   * @returns Stream with the updated entity returned by the API.
    */
   update(entity: TEntity, id: number): Observable<TEntity> {
     const resource = this.assembler.toResourceFromEntity(entity);
@@ -82,9 +82,9 @@ export abstract class BaseApiEndpoint<
   }
 
   /**
-   * Deletes an entity by ID.
-   * @param id - The ID of the entity to delete.
-   * @returns An Observable of void.
+   * Deletes an entity by identifier.
+   * @param id - Identifier of the entity to remove.
+   * @returns Completion stream for the delete operation.
    */
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.endpointUrl}/${id}`).pipe(
@@ -93,9 +93,9 @@ export abstract class BaseApiEndpoint<
   }
 
   /**
-   * Handles HTTP errors and returns a user-friendly error message.
-   * @param operation - The operation that failed.
-   * @returns A function that transforms an error into an Observable.
+   * Builds a reusable HTTP error handler for endpoint operations.
+   * @param operation - Name of the operation to include in the error context.
+   * @returns Function that maps an HTTP error into a failed observable.
    */
   protected handleError(operation: string) {
     return (error: HttpErrorResponse): Observable<never> => {

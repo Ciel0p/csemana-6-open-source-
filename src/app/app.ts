@@ -3,7 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {Layout} from './shared/presentation/components/layout/layout';
 
 /**
- * Root component of the application in the presentation layer.
+ * Root component that bootstraps localization and the application shell.
  */
 @Component({
   selector: 'app-root',

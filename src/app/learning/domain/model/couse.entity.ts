@@ -1,19 +1,7 @@
 import {Category} from './category.entity';
 
 /**
- * Represents a course entity with id, title, description, and category in the domain layer of the 'learning' bounded context.
- *
- * @remarks
- * This class is used as a domain model for courses in the learning context.
- * It encapsulates the properties and behaviors associated with a course, including its category association.
- *
- * @example
- * ```typescript
- * const course = new Course({ id: 1, title: 'Introduction to TypeScript', description: 'Learn the basics of TypeScript.', categoryId: 2 });
- * console.log(course.id); // Output: 1
- * console.log(course.title); // Output: Introduction to TypeScript
- * course.categoryId = 3;
- * ```
+ * Represents a course aggregate in the learning domain model.
  */
 export class Course {
   /**

@@ -4,7 +4,7 @@ import {IamStore} from '../../../application/iam.store';
 import {MatButton} from '@angular/material/button';
 
 /**
- * Component for handling authentication actions in the presentation layer of the IAM bounded context.
+ * Renders IAM authentication actions for sign-in, sign-up, and sign-out.
  */
 @Component({
   selector: 'app-authentication-section',

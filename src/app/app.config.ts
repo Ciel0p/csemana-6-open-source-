@@ -8,7 +8,7 @@ import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 import {iamInterceptor} from './iam/infrastructure/iam.interceptor';
 
 /**
- * Application configuration for dependency injection and providers in the infrastructure layer.
+ * Application-wide provider configuration for routing, HTTP, and localization.
  */
 export const appConfig: ApplicationConfig = {
   providers: [

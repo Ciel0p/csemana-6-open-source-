@@ -2,6 +2,9 @@ import {CanActivateFn, Router} from '@angular/router';
 import {IamStore} from '../application/iam.store';
 import {inject} from '@angular/core';
 
+/**
+ * Blocks protected routes when no authenticated IAM session exists.
+ */
 export const iamGuard: CanActivateFn = (route, state) => {
   const store = inject(IamStore);
   const router = inject(Router);
