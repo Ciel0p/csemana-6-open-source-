@@ -23,7 +23,7 @@ import {
     TranslatePipe,
     LanguageSwitcher,
     FooterContent,
-    AuthenticationSection
+    // AuthenticationSection
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.css'
