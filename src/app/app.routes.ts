@@ -4,8 +4,10 @@ import {Home} from './shared/presentation/views/home/home';
 const about = () => import('./shared/presentation/views/about/about').then(m => m.About);
 const pageNotFound = () => import('./shared/presentation/views/page-not-found/page-not-found').then(m => m.PageNotFound);
 const learningRoutes = () => import('./learning/presentation/learning.routes').then(m => m.learningRoutes);
+/*
+// Uncomment when IAM is implemented
 const iamRoutes = () => import('./iam/presentation/iam.routes').then(m => m.iamRoutes);
-
+*/
 const baseTitle = 'ACME Learning Center';
 
 /**
