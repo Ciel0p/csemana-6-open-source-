@@ -14,7 +14,7 @@ LearningCenter is a modular, domain-driven Angular application for managing lear
 - HTTP communication using Angular HttpClient
 
 ## Technologies
-- Angular CLI 20.3.2
+- Angular CLI v21
 - Angular Framework
 - Angular Routing
 - Angular HttpClient
