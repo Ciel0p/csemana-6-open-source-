@@ -22,7 +22,7 @@ export class LanguageSwitcher {
   /**
    * List of available language codes.
    */
-  protected languages = ['en', 'es'];
+  protected languages: string[] ;
 
   /**
    * Translation service instance.
@@ -36,6 +36,7 @@ export class LanguageSwitcher {
   constructor() {
     this.translate = inject(TranslateService);
     this.currentLang = this.translate.getCurrentLang();
+    this.languages = [...this.translate.getLangs()];
   }
 
   /**
