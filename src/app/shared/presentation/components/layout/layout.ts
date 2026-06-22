@@ -5,6 +5,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {TranslatePipe} from '@ngx-translate/core';
 import {LanguageSwitcher} from '../language-switcher/language-switcher';
 import {FooterContent} from '../footer-content/footer-content';
+import {
+  AuthenticationSection
+} from '../../../../iam/presentation/components/authentication-section/authentication-section';
 /**
 import {
   AuthenticationSection
@@ -25,6 +28,7 @@ import {
     TranslatePipe,
     LanguageSwitcher,
     FooterContent,
+    AuthenticationSection,
     // AuthenticationSection
   ],
   templateUrl: './layout.html',
