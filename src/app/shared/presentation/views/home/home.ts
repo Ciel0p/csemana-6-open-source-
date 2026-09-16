@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {TranslatePipe} from '@ngx-translate/core';
 
 /**
@@ -8,6 +8,7 @@ import {TranslatePipe} from '@ngx-translate/core';
   selector: 'app-home',
   imports: [TranslatePipe],
   templateUrl: './home.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './home.css'
 })
 export class Home {

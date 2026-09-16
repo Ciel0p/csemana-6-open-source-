@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LearningStore} from '../../../application/learning.store';
@@ -15,6 +15,7 @@ import {TranslatePipe} from '@ngx-translate/core';
   selector: 'app-category-form',
   imports: [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './category-form.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './category-form.css'
 })
 export class CategoryForm {

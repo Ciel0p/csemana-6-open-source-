@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
 import {MatInput} from '@angular/material/input';
@@ -26,6 +26,7 @@ import {BaseForm} from '../../../../shared/presentation/components/base-form/bas
     ReactiveFormsModule
   ],
   templateUrl: './sign-in-form.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sign-in-form.css'
 })
 export class SignInForm extends BaseForm {

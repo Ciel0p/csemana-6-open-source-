@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, computed, inject, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, computed, inject, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {LearningStore} from '../../../application/learning.store';
 import {Router} from '@angular/router';
 import {MatError} from '@angular/material/form-field';
@@ -49,6 +49,7 @@ import {MatPaginator} from '@angular/material/paginator';
     MatPaginator
   ],
   templateUrl: './course-list.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './course-list.css'
 })
 export class CourseList implements AfterViewChecked {

@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, computed, inject, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, computed, inject, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -17,6 +17,7 @@ import {MatSort, MatSortHeader} from '@angular/material/sort';
   selector: 'app-category-list',
   imports: [MatTableModule, MatButtonModule, MatError, MatProgressSpinner, TranslatePipe, MatIcon, MatPaginator, MatSort, MatSortHeader],
   templateUrl: './category-list.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './category-list.css'
 })
 export class CategoryList implements AfterViewChecked {

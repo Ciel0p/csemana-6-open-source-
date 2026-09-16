@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {BaseForm} from '../../../../shared/presentation/components/base-form/base-form';
 import {MatButton} from '@angular/material/button';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
@@ -26,6 +26,7 @@ import {SignUpCommand} from '../../../domain/model/sign-up.command';
     ReactiveFormsModule
   ],
   templateUrl: './sign-up-form.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sign-up-form.css'
 })
 export class SignUpForm extends BaseForm {

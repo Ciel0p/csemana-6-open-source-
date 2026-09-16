@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {Router} from '@angular/router';
 import {IamStore} from '../../../application/iam.store';
 import {MatButton} from '@angular/material/button';
@@ -12,6 +12,7 @@ import {MatButton} from '@angular/material/button';
     MatButton
   ],
   templateUrl: './authentication-section.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './authentication-section.css'
 })
 export class AuthenticationSection {
