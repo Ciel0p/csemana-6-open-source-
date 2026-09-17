@@ -1,4 +1,4 @@
-import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LearningStore} from '../../../application/learning.store';
@@ -15,7 +15,6 @@ import {TranslatePipe} from '@ngx-translate/core';
   selector: 'app-category-form',
   imports: [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './category-form.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './category-form.css'
 })
 export class CategoryForm {
@@ -49,7 +48,7 @@ export class CategoryForm {
       this.categoryId = params['id'] ? +params['id'] : null;
       this.isEdit = !!this.categoryId;
       if (this.isEdit && this.categoryId) {
-        let id = this.categoryId;
+        const id = this.categoryId;
         const category = this.store.getCategoryById(id)();
         if (category) {
           this.form.patchValue({ name: category.name });
