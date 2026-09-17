@@ -1,4 +1,4 @@
-import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {IamStore} from '../../../application/iam.store';
 import {MatButton} from '@angular/material/button';
@@ -12,7 +12,6 @@ import {MatButton} from '@angular/material/button';
     MatButton
   ],
   templateUrl: './authentication-section.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './authentication-section.css'
 })
 export class AuthenticationSection {
@@ -22,22 +21,16 @@ export class AuthenticationSection {
   /**
    * Navigates to the sign-in page.
    */
-  performSignIn(){
-    this.router.navigate(['/iam/sign-in']).then();
-  }
+  performSignIn = () => this.router.navigate(['/iam/sign-in']).then();
 
   /**
    * Navigates to the sign-up page.
    */
-  performSignUp(){
-    this.router.navigate(['/iam/sign-up']).then();
-  }
+  performSignUp = () => this.router.navigate(['/iam/sign-up']).then();
 
   /**
    * Signs out the current user.
    */
-  performSignOut(){
-    this.store.signOut(this.router);
-  }
+  performSignOut = () => this.store.signOut(this.router);
 
 }
