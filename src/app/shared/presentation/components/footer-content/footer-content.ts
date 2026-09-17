@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component} from '@angular/core';
 import {TranslatePipe} from '@ngx-translate/core';
 
 /**
@@ -10,7 +10,6 @@ import {TranslatePipe} from '@ngx-translate/core';
     TranslatePipe
   ],
   templateUrl: './footer-content.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './footer-content.css'
 })
 export class FooterContent {
