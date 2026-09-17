@@ -97,21 +97,23 @@ package "app" {
   package "iam" {
     package "domain.model" {
       class User <<Entity>> {
-        - _id: number
-        - _username: string
-        - _password: string
+        - #id: number
+        - #username: string
         +id: number
         +username: string
-        +password: string
       }
       User ..|> app.shared.domain.model.BaseEntity : implements
 
       class SignInCommand {
+        - #username: string
+        - #password: string
         +username: string
         +password: string
       }
 
       class SignUpCommand {
+        - #username: string
+        - #password: string
         +username: string
         +password: string
       }
@@ -228,22 +230,24 @@ package "app" {
   package "learning" {
     package "domain.model" {
       class Category <<Entity>> {
-        - _id: number
-        - _name: string
+        - #id: number
+        - #name: string
         +id: number
         +name: string
       }
       Category ..|> app.shared.domain.model.BaseEntity : implements
 
       class Course <<Entity>> {
-        - _id: number
-        - _title: string
-        - _description: string
-        - _categoryId: number
+        - #id: number
+        - #title: string
+        - #description: string
+        - #categoryId: number
+        - #category: Category | null
         +id: number
         +title: string
         +description: string
         +categoryId: number
+        +category: Category | null
       }
       Course ..|> app.shared.domain.model.BaseEntity : implements
       Category "1" <-- "*" Course : references categoryId
