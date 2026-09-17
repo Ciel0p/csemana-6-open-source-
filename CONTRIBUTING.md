@@ -42,7 +42,7 @@ src/app/<bounded-context>/
 
 ### Object-Oriented Programming (OOP) & Clean Code
 - **SOLID Principles**: Adhere to Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion across all classes and abstractions.
-- **Encapsulation**: Domain entities should protect internal state with private fields and expose explicit getters/setters or business behavior methods.
+- **Encapsulation**: Domain entities and command models protect internal state using native ECMAScript private fields (`#id`, `#name`) rather than soft `_` prefixes, exposing explicit getters/setters or business behavior methods.
 - **Assembler Pattern**: Keep infrastructure DTOs (`*Resource`, `*Response`) decoupled from domain entities (`*Entity`) using pure, bidirectional `BaseAssembler` implementations.
 - **Composition over Inheritance**: Prefer composing specialized services/endpoints into facades (`BaseApi`) over deep class inheritance hierarchies.
 
@@ -126,6 +126,7 @@ Versions follow the [SemVer 2.0.0](https://semver.org/) schema: `MAJOR.MINOR.PAT
 - **Strict Type Checking**: Maintain strict TypeScript configuration (`strict: true`, `noImplicitAny: true`, `noImplicitReturns: true`).
 - **Avoid `any`**: Use explicit interfaces, generics, or `unknown` (with type narrowing) instead of `any`.
 - **Target ECMAScript**: Target modern ECMAScript standard (`ES2024`) per `tsconfig.json`.
+- **Private Properties in Domain Models**: Use native ECMAScript `#` private fields (`#id`, `#name`) for domain entity and command backing fields to ensure hard runtime encapsulation and avoid artificial underscore prefixes.
 - **Naming Conventions**:
   - `PascalCase`: Classes, interfaces, types, enums, components (`Course`, `BaseEntity`, `CategoryList`).
   - `camelCase`: Properties, methods, functions, variables, signals (`courseId`, `loadCourses`, `currentUser`).
