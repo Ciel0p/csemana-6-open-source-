@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, computed, inject, ViewChild, ChangeDetectionStrategy} from '@angular/core';
+import {Component, computed, inject, viewChild} from '@angular/core';
 import {LearningStore} from '../../../application/learning.store';
 import {Router} from '@angular/router';
 import {MatError} from '@angular/material/form-field';
@@ -49,10 +49,9 @@ import {MatPaginator} from '@angular/material/paginator';
     MatPaginator
   ],
   templateUrl: './course-list.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './course-list.css'
 })
-export class CourseList implements AfterViewChecked {
+export class CourseList {
   readonly store = inject(LearningStore);
   protected router = inject(Router);
 
@@ -61,16 +60,22 @@ export class CourseList implements AfterViewChecked {
    */
   displayedColumns: string[] = ['id', 'title', 'description', 'category', 'actions'];
 
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  readonly sort = viewChild(MatSort);
+  readonly paginator = viewChild(MatPaginator);
 
   /**
    * Computed data source for the table.
    */
-  dataSource = computed(() => {
+  readonly dataSource = computed(() => {
     const source = new MatTableDataSource(this.store.courses());
-    source.sort = this.sort;
-    source.paginator = this.paginator;
+    const sort = this.sort();
+    if (sort) {
+      source.sort = sort;
+    }
+    const paginator = this.paginator();
+    if (paginator) {
+      source.paginator = paginator;
+    }
     return source;
   });
 
@@ -95,17 +100,5 @@ export class CourseList implements AfterViewChecked {
    */
   navigateToNew() {
     this.router.navigate(['learning/courses/new']).then();
-  }
-
-  /**
-   * Lifecycle hook to update paginator and sort after view checked.
-   */
-  ngAfterViewChecked() {
-    if (this.dataSource().paginator !== this.paginator) {
-      this.dataSource().paginator = this.paginator;
-    }
-    if (this.dataSource().sort !== this.sort) {
-      this.dataSource().sort = this.sort;
-    }
   }
 }
