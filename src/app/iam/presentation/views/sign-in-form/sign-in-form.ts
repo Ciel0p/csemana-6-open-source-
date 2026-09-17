@@ -1,4 +1,4 @@
-import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
 import {MatInput} from '@angular/material/input';
@@ -26,7 +26,6 @@ import {BaseForm} from '../../../../shared/presentation/components/base-form/bas
     ReactiveFormsModule
   ],
   templateUrl: './sign-in-form.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sign-in-form.css'
 })
 export class SignInForm extends BaseForm {
@@ -44,12 +43,12 @@ export class SignInForm extends BaseForm {
   /**
    * Performs the sign-in operation if the form is valid.
    */
-  performSignIn() {
+  performSignIn = () => {
     if (this.form.invalid) return;
     const signInCommand = new SignInCommand({
       username: this.form.value.username!,
       password: this.form.value.password!
     });
     this.store.signIn(signInCommand, this.router);
-  }
+  };
 }
