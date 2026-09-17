@@ -26,13 +26,13 @@ export class SignInApiEndpoint extends ErrorHandlingEnabledBaseType {
    * @param signInCommand - Command containing username and password.
    * @returns Stream with the authenticated user resource and access token.
    */
-  signIn(signInCommand: SignInCommand): Observable<SignInResource> {
+  signIn = (signInCommand: SignInCommand): Observable<SignInResource> => {
     const signInRequest = this.assembler.toRequestFromCommand(signInCommand);
     return this.http.post<SignInResponse>(signInApiEndpointUrl, signInRequest).pipe(
       map(response => this.assembler.toResourceFromResponse(response)),
       catchError(this.handleError('Failed to sign-in'))
     );
-  }
+  };
 
 
 }
