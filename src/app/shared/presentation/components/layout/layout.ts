@@ -1,18 +1,15 @@
-import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {TranslatePipe} from '@ngx-translate/core';
 import {LanguageSwitcher} from '../language-switcher/language-switcher';
 import {FooterContent} from '../footer-content/footer-content';
+/*
 import {
   AuthenticationSection
 } from '../../../../iam/presentation/components/authentication-section/authentication-section';
-/**
-import {
-  AuthenticationSection
-} from '../../../../iam/presentation/components/authentication-section/authentication-section';
-**/
+*/
 
 /**
  * Main shell component that hosts top-level navigation and routed content.
@@ -28,11 +25,9 @@ import {
     TranslatePipe,
     LanguageSwitcher,
     FooterContent,
-    AuthenticationSection,
     // AuthenticationSection
   ],
   templateUrl: './layout.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './layout.css'
 })
 export class Layout {
