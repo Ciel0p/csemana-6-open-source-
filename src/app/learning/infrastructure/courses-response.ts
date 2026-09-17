@@ -28,7 +28,7 @@ export interface CourseResource extends BaseResource {
  */
 export interface CoursesResponse extends BaseResponse {
   /**
-   * Array of course resources included in the response.
+   * An Array for course resources included in the response.
    */
   courses: CourseResource[];
 }
