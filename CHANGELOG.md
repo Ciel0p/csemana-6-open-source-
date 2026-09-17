@@ -5,10 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.0] - 2026-09-16
+
+### Added
+- **Project Structure Representation**: Added visual directory tree representation to `README.md` illustrating project structure, documentation, bounded contexts, public assets, and root configurations.
+- **Requirement Traceability Matrix (RTM)**: Added RTM mapping table to `docs/user-stories.md` linking user stories to bounded contexts and architectural implementation elements.
 
 ### Changed
-- Refactored domain entities (`Category`, `Course`, `User`) and command models (`SignInCommand`, `SignUpCommand`) to use native ECMAScript `#` private fields instead of TypeScript `private _` properties for true runtime encapsulation.
+- **Domain Privacy Encapsulation**: Refactored domain entities (`Category`, `Course`, `User`) and command models (`SignInCommand`, `SignUpCommand`) to use native ECMAScript `#` private fields instead of TypeScript `private _` properties for true runtime encapsulation.
+- **Requirement Specifications**: Refactored `docs/user-stories.md` into functional requirement artifacts, removing UI implementation details and third-party dependencies while standardizing acceptance criteria on Given-When-Then scenarios.
+- **Project Documentation**: Enhanced `README.md` with Domain-Driven Design (DDD) architectural details, documentation index, and updated Angular 22 platform references.
 
 ## [1.0.0] - 2026-09-16
 
