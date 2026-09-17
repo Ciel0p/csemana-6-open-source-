@@ -1,4 +1,4 @@
-import {Component, inject, signal, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Layout} from './shared/presentation/components/layout/layout';
 
@@ -9,7 +9,6 @@ import {Layout} from './shared/presentation/components/layout/layout';
   selector: 'app-root',
   imports: [Layout],
   templateUrl: './app.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.css'
 })
 export class App {
@@ -21,13 +20,12 @@ export class App {
   /**
    * Translation service instance.
    */
-  private translate: TranslateService;
+  private translate = inject(TranslateService);
 
   /**
    * Creates an instance of App and sets up translation.
    */
   constructor() {
-    this.translate = inject(TranslateService);
     this.translate.addLangs(['en', 'es']);
     this.translate.use('en');
   }
