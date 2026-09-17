@@ -26,13 +26,13 @@ export class SignUpApiEndpoint extends ErrorHandlingEnabledBaseType {
    * @param signUpCommand - Command containing sign-up credentials.
    * @returns Stream with the created user resource.
    */
-  signUp(signUpCommand: SignUpCommand): Observable<SignUpResource> {
+  signUp = (signUpCommand: SignUpCommand): Observable<SignUpResource> => {
     const signUpRequest = this.assembler.toRequestFromCommand(signUpCommand);
     return this.http.post<SignUpResponse>(signUpApiEndpointUrl, signUpRequest).pipe(
       map(response => this.assembler.toResourceFromResponse(response)),
       catchError(this.handleError('Failed to sign-up'))
     );
-  }
+  };
 
 
 }
