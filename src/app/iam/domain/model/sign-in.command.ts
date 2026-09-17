@@ -2,12 +2,24 @@
  * Captures credentials required to authenticate in the IAM context.
  */
 export class SignInCommand {
+  #username: string;
+  #password: string;
+
+  /**
+   * Creates a new command instance.
+   * @param props - Credential values for sign-in.
+   */
+  constructor(props: { username: string; password: string }) {
+    this.#username = props.username;
+    this.#password = props.password;
+  }
+
   /**
    * Gets the username for sign-in.
    * @returns The username.
    */
   get username(): string {
-    return this._username;
+    return this.#username;
   }
 
   /**
@@ -15,7 +27,7 @@ export class SignInCommand {
    * @param value The username.
    */
   set username(value: string) {
-    this._username = value;
+    this.#username = value;
   }
 
   /**
@@ -23,7 +35,7 @@ export class SignInCommand {
    * @returns The password.
    */
   get password(): string {
-    return this._password;
+    return this.#password;
   }
 
   /**
@@ -31,17 +43,6 @@ export class SignInCommand {
    * @param value The password.
    */
   set password(value: string) {
-    this._password = value;
-  }
-  private _username: string;
-  private _password: string;
-
-  /**
-   * Creates a new command instance.
-   * @param props - Credential values for sign-in.
-   */
-  constructor(props: {username: string, password: string}) {
-    this._username = props.username;
-    this._password = props.password;
+    this.#password = value;
   }
 }
