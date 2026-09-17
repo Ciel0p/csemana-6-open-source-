@@ -5,11 +5,11 @@ import {BaseEntity} from '../../../shared/domain/model/base-entity';
  */
 export class User implements BaseEntity {
   /**
-   * Sets the username of the user.
-   * @param value The new username.
+   * Gets the ID of the user.
+   * @returns The ID.
    */
-  set username(value: string) {
-    this._username = value;
+  get id(): number {
+    return this._id;
   }
 
   /**
@@ -29,11 +29,11 @@ export class User implements BaseEntity {
   }
 
   /**
-   * Gets the ID of the user.
-   * @returns The ID.
+   * Sets the username of the user.
+   * @param value The new username.
    */
-  get id(): number {
-    return this._id;
+  set username(value: string) {
+    this._username = value;
   }
 
   private _id: number;
