@@ -1,4 +1,4 @@
-import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LearningStore} from '../../../application/learning.store';
@@ -23,7 +23,6 @@ import {TranslatePipe} from '@ngx-translate/core';
     TranslatePipe
   ],
   templateUrl: './course-form.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './course-form.css'
 })
 export class CourseForm {
@@ -64,7 +63,7 @@ export class CourseForm {
       this.courseId = params['id'] ? +params['id'] : null;
       this.isEdit = !!this.courseId;
       if (this.isEdit && this.courseId) {
-        let id = this.courseId;
+        const id = this.courseId;
         const course = this.store.getCourseById(id)();
         if (course) {
           this.form.patchValue({
