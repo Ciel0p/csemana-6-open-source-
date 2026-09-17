@@ -1,4 +1,4 @@
-import {computed, Injectable, Signal, signal} from '@angular/core';
+import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import {Course} from '../domain/model/couse.entity';
 import {Category} from '../domain/model/category.entity';
 import {LearningApi} from '../infrastructure/learning-api';
@@ -12,6 +12,8 @@ import {retry} from 'rxjs';
   providedIn: 'root'
 })
 export class LearningStore {
+  private readonly learningApi = inject(LearningApi);
+
   /**
    * Computed signal for the count of courses.
    */
@@ -52,9 +54,8 @@ export class LearningStore {
 
   /**
    * Creates an instance of LearningStore and loads initial data.
-   * @param learningApi - The API service for learning data.
    */
-  constructor(private learningApi: LearningApi) {
+  constructor() {
     this.loadCategories();
     this.loadCourses();
   }
@@ -64,24 +65,23 @@ export class LearningStore {
    * @param id - Category identifier.
    * @returns Reactive selection for the requested category.
    */
-  getCategoryById(id: number): Signal<Category | undefined> {
-    return computed(() => id ? this.categories().find(c => c.id === id) : undefined);
-  }
+  getCategoryById = (id: number): Signal<Category | undefined> =>
+    computed(() => id ? this.categories().find(c => c.id === id) : undefined);
 
   /**
    * Selects a course by identifier.
    * @param id - Course identifier.
    * @returns Reactive selection for the requested course.
    */
-  getCourseById(id: number): Signal<Course | undefined> {
+  getCourseById = (id: number): Signal<Course | undefined> => {
     return computed(() => id ? this.courses().find(c => c.id === id) : undefined);
   }
 
   /**
-   * Adds a new course.
+   * adds a new course.
    * @param course - The course to add.
    */
-  addCourse(course: Course): void {
+  addCourse = (course: Course): void => {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     this.learningApi.createCourse(course).pipe(retry(2)).subscribe({
@@ -95,13 +95,13 @@ export class LearningStore {
         this.loadingSignal.set(false);
       }
     });
-  }
+  };
 
   /**
    * Updates an existing course.
    * @param updatedCourse - The course to update.
    */
-  updateCourse(updatedCourse: Course): void {
+  updateCourse = (updatedCourse: Course): void => {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     this.learningApi.updateCourse(updatedCourse).pipe(retry(2)).subscribe({
@@ -123,7 +123,7 @@ export class LearningStore {
    * Deletes a course by ID.
    * @param id - The ID of the course to delete.
    */
-  deleteCourse(id: number): void {
+  deleteCourse = (id: number): void => {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     this.learningApi.deleteCourse(id).pipe(retry(2)).subscribe({
@@ -142,7 +142,7 @@ export class LearningStore {
    * Adds a new category.
    * @param category - The category to add.
    */
-  addCategory(category: Category): void {
+  addCategory = (category: Category): void => {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     this.learningApi.createCategory(category).pipe(retry(2)).subscribe({
@@ -161,7 +161,7 @@ export class LearningStore {
    * Updates an existing category.
    * @param updatedCategory - The category to update.
    */
-  updateCategory(updatedCategory: Category): void {
+  updateCategory = (updatedCategory: Category): void => {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     this.learningApi.updateCategory(updatedCategory).pipe(retry(2)).subscribe({
@@ -182,7 +182,7 @@ export class LearningStore {
    * Deletes a category by ID.
    * @param id - The ID of the category to delete.
    */
-  deleteCategory(id: number): void {
+  deleteCategory = (id: number): void => {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     this.learningApi.deleteCategory(id).pipe(retry(2)).subscribe({
@@ -201,7 +201,7 @@ export class LearningStore {
   /**
    * Loads all courses from the API.
    */
-  private loadCourses(): void {
+  private loadCourses = (): void => {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     this.learningApi.getCourses().pipe(takeUntilDestroyed()).subscribe({
@@ -219,12 +219,12 @@ export class LearningStore {
         this.loadingSignal.set(false);
       }
     });
-  }
+  };
 
   /**
    * Loads all categories from the API.
    */
-  private loadCategories(): void {
+  private loadCategories = (): void => {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
     this.learningApi.getCategories().pipe(takeUntilDestroyed()).subscribe({
@@ -240,11 +240,11 @@ export class LearningStore {
     });
   }
 
-  private assignCategoriesToCourses(): void {
+  private assignCategoriesToCourses = (): void => {
     this.coursesSignal.update(courses => courses.map(course => this.assignCategoryToCourse(course)));
-  }
+  };
 
-  private assignCategoryToCourse(course: Course): Course {
+  private assignCategoryToCourse = (course: Course): Course => {
     const categoryId = course.categoryId ?? 0;
     course.category = categoryId ? this.getCategoryById(categoryId)() ?? null : null;
     return course;
@@ -256,7 +256,7 @@ export class LearningStore {
    * @param fallback - Default message when details are unavailable.
    * @returns Normalized message.
    */
-  private formatError(error: any, fallback: string): string {
+  private formatError = (error: unknown, fallback: string): string => {
     if (error instanceof Error) {
       return error.message.includes('Resource not found') ? `${fallback}: Not found` : error.message;
     }
