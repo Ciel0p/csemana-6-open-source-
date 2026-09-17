@@ -1,4 +1,4 @@
-import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {BaseForm} from '../../../../shared/presentation/components/base-form/base-form';
 import {MatButton} from '@angular/material/button';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
@@ -26,7 +26,6 @@ import {SignUpCommand} from '../../../domain/model/sign-up.command';
     ReactiveFormsModule
   ],
   templateUrl: './sign-up-form.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sign-up-form.css'
 })
 export class SignUpForm extends BaseForm {
@@ -44,12 +43,12 @@ export class SignUpForm extends BaseForm {
   /**
    * Performs the sign-up operation if the form is valid.
    */
-  performSignUp() {
+  performSignUp = () => {
     if (this.form.invalid) return;
     const signUpCommand = new SignUpCommand({
       username: this.form.value.username!,
       password: this.form.value.password!
     });
     this.store.signUp(signUpCommand, this.router);
-  }
+  };
 }
