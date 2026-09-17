@@ -1,4 +1,4 @@
-import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -11,14 +11,13 @@ import {TranslateService} from '@ngx-translate/core';
     MatButtonToggleModule
   ],
   templateUrl: './language-switcher.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './language-switcher.css'
 })
 export class LanguageSwitcher {
   /**
    * The currently selected language code.
    */
-  protected currentLang: string = 'en';
+  protected currentLang = 'en';
 
   /**
    * List of available language codes.
@@ -36,7 +35,7 @@ export class LanguageSwitcher {
    */
   constructor() {
     this.translate = inject(TranslateService);
-    this.currentLang = this.translate.getCurrentLang();
+    this.currentLang = this.translate.getCurrentLang() ?? 'en';
     this.languages = [...this.translate.getLangs()];
   }
 
@@ -46,8 +45,8 @@ export class LanguageSwitcher {
    *
    * @param language - The language code to switch to (e.g., 'en', 'es')
    */
-  useLanguage(language: string) {
+  useLanguage = (language: string) => {
     this.translate.use(language);
     this.currentLang = language;
-  }
+  };
 }
