@@ -11,23 +11,20 @@ export class SignInAssembler {
    * @param response - Raw response returned by the sign-in endpoint.
    * @returns Mapped sign-in resource.
    */
-  toResourceFromResponse(response: SignInResponse): SignInResource {
-    return {
-      id: response.id,
-      username: response.username,
-      token: response.token,
-    } as SignInResource;
-  }
+  toResourceFromResponse = (response: SignInResponse): SignInResource => ({
+    id: response.id,
+    username: response.username,
+    token: response.token,
+  } as SignInResource);
 
   /**
    * Converts a sign-in command into the request payload expected by the API.
    * @param command - Domain command with credentials.
    * @returns Mapped request payload.
    */
-  toRequestFromCommand(command: SignInCommand): SignInRequest {
-    return {
+  toRequestFromCommand = (command: SignInCommand): SignInRequest =>
+    ({
       username: command.username,
       password: command.password,
-    } as SignInRequest;
-  }
+    } as SignInRequest)
 }

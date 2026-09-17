@@ -12,33 +12,30 @@ export class CategoryAssembler implements BaseAssembler<Category, CategoryResour
    * @param response - The API response containing categories.
    * @returns An array of Category entities.
    */
-  toEntitiesFromResponse(response: CategoriesResponse): Category[] {
-    return response.categories.map(resource => this.toEntityFromResource(resource as CategoryResource));
-  }
+  toEntitiesFromResponse = (response: CategoriesResponse): Category[] =>
+    response.categories.map(resource => this.toEntityFromResource(resource as CategoryResource));
 
   /**
    * Converts a CategoryResource to a Category entity.
    * @param resource - The resource to convert.
    * @returns The converted Category entity.
    */
-  toEntityFromResource(resource: CategoryResource): Category {
-    return new Category({
+  toEntityFromResource = (resource: CategoryResource): Category =>
+    new Category({
       id: resource.id,
       name: resource.name
     });
-  }
 
   /**
    * Converts a Category entity to a CategoryResource.
    * @param entity - The entity to convert.
    * @returns The converted CategoryResource.
    */
-  toResourceFromEntity(entity: Category): CategoryResource {
-    return {
+  toResourceFromEntity = (entity: Category): CategoryResource =>
+    ({
       id: entity.id,
       name: entity.name
-    } as CategoryResource;
-  }
+    } as CategoryResource);
 
 
 }

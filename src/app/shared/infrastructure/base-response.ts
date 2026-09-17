@@ -1,6 +1,7 @@
 /**
  * Marker interface for HTTP response envelopes returned by API endpoints.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface BaseResponse {}
 
 /**

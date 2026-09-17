@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, computed, inject, ViewChild} from '@angular/core';
+import {Component, computed, inject, viewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -19,7 +19,7 @@ import {MatSort, MatSortHeader} from '@angular/material/sort';
   templateUrl: './category-list.html',
   styleUrl: './category-list.css'
 })
-export class CategoryList implements AfterViewChecked {
+export class CategoryList {
   readonly store = inject(LearningStore);
   protected router = inject(Router);
 
@@ -28,16 +28,22 @@ export class CategoryList implements AfterViewChecked {
    */
   displayedColumns: string[] = ['id', 'name', 'actions'];
 
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  readonly sort = viewChild(MatSort);
+  readonly paginator = viewChild(MatPaginator);
 
   /**
    * Computed data source for the table.
    */
-  dataSource = computed(() => {
+  readonly dataSource = computed(() => {
     const source = new MatTableDataSource(this.store.categories());
-    source.sort = this.sort;
-    source.paginator = this.paginator;
+    const sort = this.sort();
+    if (sort) {
+      source.sort = sort;
+    }
+    const paginator = this.paginator();
+    if (paginator) {
+      source.paginator = paginator;
+    }
     return source;
   });
 
@@ -62,17 +68,5 @@ export class CategoryList implements AfterViewChecked {
    */
   navigateToNew() {
     this.router.navigate(['learning/categories/new']).then();
-  }
-
-  /**
-   * Lifecycle hook to update paginator and sort after view checked.
-   */
-  ngAfterViewChecked() {
-    if (this.dataSource().paginator !== this.paginator) {
-      this.dataSource().paginator = this.paginator;
-    }
-    if (this.dataSource().sort !== this.sort) {
-      this.dataSource().sort = this.sort;
-    }
   }
 }

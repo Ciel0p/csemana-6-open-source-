@@ -16,7 +16,7 @@ export class PageNotFound implements OnInit {
   /**
    * The invalid path that led to this page.
    */
-  protected invalidPath:  string  = '';
+  protected invalidPath  = '';
 
   /**
    * Activated route instance.

@@ -1,4 +1,4 @@
-import {computed, Injectable, signal} from '@angular/core';
+import {computed, inject, Injectable, signal} from '@angular/core';
 import {User} from '../domain/model/user.entity';
 import {SignInCommand} from '../domain/model/sign-in.command';
 import {Router} from '@angular/router';
@@ -10,10 +10,11 @@ import {SignUpCommand} from '../domain/model/sign-up.command';
  */
 @Injectable({providedIn: 'root'})
 export class IamStore {
+  private readonly iamApi = inject(IamApi);
   private readonly isSignedInSignal = signal<boolean>(false);
   private readonly currentUsernameSignal = signal<string | null>(null);
   private readonly currentUserIdSignal = signal<number | null>(null);
-  private readonly usersSignal = signal<Array<User>>([]);
+  private readonly usersSignal = signal<User[]>([]);
 
   /**
    * Readonly signal indicating if the user is signed in.
@@ -52,9 +53,8 @@ export class IamStore {
 
   /**
    * Creates an instance of IamStore.
-   * @param iamApi The IAM API service.
    */
-  constructor(private iamApi: IamApi) {
+  constructor() {
     this.isSignedInSignal.set(false);
     this.currentUsernameSignal.set(null);
     this.currentUserIdSignal.set(null);

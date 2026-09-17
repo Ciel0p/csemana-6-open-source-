@@ -21,22 +21,16 @@ export class AuthenticationSection {
   /**
    * Navigates to the sign-in page.
    */
-  performSignIn(){
-    this.router.navigate(['/iam/sign-in']).then();
-  }
+  performSignIn = () => this.router.navigate(['/iam/sign-in']).then();
 
   /**
    * Navigates to the sign-up page.
    */
-  performSignUp(){
-    this.router.navigate(['/iam/sign-up']).then();
-  }
+  performSignUp = () => this.router.navigate(['/iam/sign-up']).then();
 
   /**
    * Signs out the current user.
    */
-  performSignOut(){
-    this.store.signOut(this.router);
-  }
+  performSignOut = () => this.store.signOut(this.router);
 
 }

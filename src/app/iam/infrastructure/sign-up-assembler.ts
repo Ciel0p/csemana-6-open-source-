@@ -11,22 +11,19 @@ export class SignUpAssembler {
    * @param response - Raw response returned by the sign-up endpoint.
    * @returns Mapped sign-up resource.
    */
-  toResourceFromResponse(response: SignUpResponse): SignUpResource {
-    return {
-      id: response.id,
-      username: response.username,
-    } as SignUpResource;
-  }
+  toResourceFromResponse = (response: SignUpResponse): SignUpResource => ({
+    id: response.id,
+    username: response.username,
+  } as SignUpResource);
 
   /**
    * Converts a sign-up command into the request payload expected by the API.
    * @param command - Domain command with account credentials.
    * @returns Mapped request payload.
    */
-  toRequestFromCommand(command: SignUpCommand): SignUpRequest {
-    return {
+  toRequestFromCommand = (command: SignUpCommand): SignUpRequest =>
+    ({
       username: command.username,
       password: command.password,
-    } as SignUpRequest;
-  }
+    } as SignUpRequest)
 }

@@ -3,7 +3,7 @@
  *
  * @remarks
  * A concrete API service composes one or more endpoint classes and exposes
- * use-case oriented methods to the application layer.
+ * domain-driven-oriented methods to the application layer.
  */
 export abstract class BaseApi {
   // No methods defined; child classes will compose endpoint instances

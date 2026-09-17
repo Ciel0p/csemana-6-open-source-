@@ -43,12 +43,12 @@ export class SignUpForm extends BaseForm {
   /**
    * Performs the sign-up operation if the form is valid.
    */
-  performSignUp() {
+  performSignUp = () => {
     if (this.form.invalid) return;
     const signUpCommand = new SignUpCommand({
       username: this.form.value.username!,
       password: this.form.value.password!
     });
     this.store.signUp(signUpCommand, this.router);
-  }
+  };
 }

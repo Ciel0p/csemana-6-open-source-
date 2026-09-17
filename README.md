@@ -1,7 +1,7 @@
 # ACME Learning Center Application (`learning-center`)
 
 ## Overview
-`learning-center` is an Angular 21 client application for managing learning information in the ACME Learning Center domain. The current implementation focuses on maintaining categories and courses, with the codebase organized around bounded contexts and layered responsibilities.
+`learning-center` is an Angular 22 client application for managing learning information in the ACME Learning Center domain. The current implementation focuses on maintaining categories and courses, with the codebase organized around Domain-Driven Design (DDD) bounded contexts and layered responsibilities.
 
 In development mode, the application consumes a local fake API exposed through `json-server`. The frontend is configured to call `http://localhost:3000/api/v1` for learning resources.
 
@@ -9,10 +9,11 @@ In development mode, the application consumes a local fake API exposed through `
 - Category maintenance with create, read, update, and delete behavior
 - Course maintenance with create, read, update, and delete behavior
 - Course-to-category association through category selection
-- Internationalization with English and Spanish resources using `ngx-translate`
-- Client-side navigation with Angular Router
-- HTTP communication through Angular `HttpClient`
-- Angular Material-based presentation components
+- Signal-based state management and reactive UI updates (`signal`, `computed`, `viewChild`)
+- Material Design 3 (M3) styling with custom theme tokens
+- Internationalization with English and Spanish resources using `@ngx-translate`
+- Client-side navigation with Angular Router and standalone component routing
+- HTTP communication through Angular `HttpClient` and REST Assembler pattern
 - Layered organization by bounded context:
   - `learning`
   - `iam`
@@ -28,46 +29,99 @@ The currently enabled application routes expose:
 The codebase also contains an `iam` bounded context, including routes, store, interceptor, and endpoint classes. However, IAM routes are currently not enabled in `src/app/app.routes.ts`, so authentication is present in the codebase but not active in the running application.
 
 ## Architecture Overview
-The application structure follows bounded contexts and layers under `src/app`:
+The application structure follows Domain-Driven Design (DDD) bounded contexts and layered responsibilities:
 
-- `learning`
-  - `domain`
-  - `application`
-  - `infrastructure`
-  - `presentation`
-- `iam`
-  - `domain`
-  - `application`
-  - `infrastructure`
-  - `presentation`
-- `shared`
-  - `domain`
-  - `infrastructure`
-  - `presentation`
+- **`learning`**: Core domain managing categories, courses, and educational resources.
+- **`iam`**: Identity and Access Management domain handling user accounts, credentials, and authentication sessions.
+- **`shared`**: Cross-cutting reusable technical contracts, base API infrastructure, shell layout, and internationalization components.
 
-This structure helps keep domain concepts, API integration, application state, and UI concerns clearly separated.
+Each bounded context is structured into four distinct layers:
+- **`domain`**: Entities (with native ECMAScript `#` private fields), aggregates, and command models.
+- **`application`**: Signal-based state management stores (`signal`, `computed`).
+- **`infrastructure`**: REST API endpoints, DTO models, assemblers, HTTP guards, and interceptors.
+- **`presentation`**: Standalone components, routed views, and forms.
+
+## Project Structure
+The repository layout uses the following tree structure:
+
+```text
+learning-center/
+├── docs/                               # Architectural and requirement documentation
+│   ├── adrs.md                         # Architectural Decision Records (ADRs)
+│   ├── class-diagram.puml              # PlantUML domain and component class diagram
+│   └── user-stories.md                 # Functional user stories & Requirements Traceability Matrix (RTM)
+├── public/                             # Static public assets
+│   ├── acme-logo.svg                   # Brand logo asset
+│   ├── favicon.ico                     # Application favicon
+│   └── i18n/                           # Translation dictionaries for @ngx-translate
+│       ├── en.json                     # English locale strings
+│       └── es.json                     # Spanish locale strings
+├── server/                             # Fake REST API backend (json-server)
+│   ├── db.json                         # Mock database resource collections
+│   ├── routes.json                     # Custom route rewrite definitions (/api/v1/*)
+│   └── start.sh                        # Shell launcher for fake backend
+├── src/                                # Application source code
+│   ├── index.html                      # Single-page HTML entry point
+│   ├── main.ts                         # Application bootstrap entry point
+│   ├── material-theme.scss             # Material 3 theme configuration & design tokens
+│   ├── styles.css                      # Global CSS stylesheet
+│   ├── environments/                   # Build and runtime environment settings
+│   │   ├── environment.ts              # Production environment configuration
+│   │   └── environment.development.ts  # Local development environment configuration
+│   └── app/                            # Application root and bounded contexts
+│       ├── app.config.ts               # Application-level providers (router, i18n, http, animations)
+│       ├── app.routes.ts               # Root routing definitions
+│       ├── app.ts                      # Root shell component class
+│       ├── app.html                    # Root shell template
+│       ├── app.css                     # Root shell styling
+│       ├── app.spec.ts                 # Root component unit tests
+│       ├── iam/                        # Identity and Access Management Bounded Context
+│       │   ├── application/            # Application state management (IamStore)
+│       │   ├── domain/                 # Domain model (User entity, SignIn/SignUp commands)
+│       │   ├── infrastructure/         # Endpoints, interceptors, guards, assemblers
+│       │   └── presentation/           # Authentication section, Sign-In and Sign-Up forms
+│       ├── learning/                   # Learning Bounded Context
+│       │   ├── application/            # Application state management (LearningStore)
+│       │   ├── domain/                 # Domain model (Category and Course entities)
+│       │   ├── infrastructure/         # Endpoints, responses, Category & Course assemblers
+│       │   └── presentation/           # Category and Course lists and forms
+│       └── shared/                     # Shared Kernel & Infrastructure
+│           ├── domain/                 # Base domain contracts (BaseEntity)
+│           ├── infrastructure/         # Base HTTP client, base API endpoint, base assembler
+│           └── presentation/           # Shell layout, header, footer, language switcher, base form
+├── angular.json                        # Angular CLI workspace configuration
+├── CHANGELOG.md                        # Project version release history
+├── CONTRIBUTING.md                     # Architecture, Git Flow, and coding guidelines
+├── eslint.config.js                    # ESLint flat configuration (TypeScript & Angular rules)
+├── LICENSE.md                          # Project license file
+├── package.json                        # npm dependencies and project scripts
+├── README.md                           # Main project documentation
+├── tsconfig.json                       # Root TypeScript compiler options (Target ES2024)
+├── tsconfig.app.json                   # Application compilation TypeScript options
+└── tsconfig.spec.json                  # Unit testing compilation TypeScript options
+```
 
 ## Technologies
-- Angular 21
-- TypeScript
-- RxJS
-- Angular Router
-- Angular `HttpClient`
-- Angular Material
-- `ngx-translate`
-- `json-server`
-- PlantUML
+- **Framework**: Angular 22 (Standalone Components, Signals, `inject()`)
+- **Language**: TypeScript 6.0+ (Target ES2024, native `#` private fields)
+- **UI & Theming**: Angular Material 22 (Material 3 tokens, Sass theme config)
+- **State & Reactivity**: Angular Signals & RxJS
+- **Internationalization**: `@ngx-translate/core` & `@ngx-translate/http-loader`
+- **Linting & Code Quality**: ESLint flat config with `angular-eslint` & `typescript-eslint`
+- **Testing**: Jasmine & Karma (Chrome Headless runner)
+- **Mock API**: `json-server`
+- **Diagrams**: PlantUML
 
 ## Documentation
-### User Stories
-Functional requirements are documented in [`docs/user-stories.md`](docs/user-stories.md).
-
-### Class Diagram
-The class diagram is available in [`docs/class-diagram.puml`](docs/class-diagram.puml).
+- **User Stories & Requirements Traceability**: [`docs/user-stories.md`](docs/user-stories.md) - Functional requirement specifications and RTM mapping.
+- **Class Diagram**: [`docs/class-diagram.puml`](docs/class-diagram.puml) - PlantUML architectural model of bounded contexts, entities, and services.
+- **Architectural Decision Records (ADRs)**: [`docs/adrs.md`](docs/adrs.md) - Key architectural and technology choices.
+- **Contributing Guidelines**: [`CONTRIBUTING.md`](CONTRIBUTING.md) - DDD layers, OOP rules, Git Flow, Conventional Commits, and coding standards.
+- **Changelog**: [`CHANGELOG.md`](CHANGELOG.md) - Version history following Keep a Changelog and SemVer conventions.
 
 ## Prerequisites
 Before running the project, make sure the environment includes:
-- Node.js
+- Node.js (v20+ recommended)
 - npm
 
 ## Installation
@@ -116,19 +170,21 @@ sh start.sh
 For local development, start the fake API first and then start the Angular application:
 
 ```bash
+# Terminal 1: Fake REST API
 npx json-server --watch server/db.json --routes server/routes.json --port 3000
+
+# Terminal 2: Angular Dev Server
 npm start
 ```
 
 ## Available Scripts
 From the project root, the following scripts are available:
 
-```bash
-npm start
-npm run build
-npm run watch
-npm test
-```
+- `npm start` - Starts the development server (`ng serve`).
+- `npm run build` - Compiles and builds the production bundles (`ng build`).
+- `npm run watch` - Builds the application in watch mode with development configuration.
+- `npm test` - Executes unit tests via Karma and Jasmine (`ng test`).
+- `npm run lint` - Performs static analysis and linting across TypeScript and HTML files (`ng lint`).
 
 ## Fake API Notes
 - The fake API currently provides learning resources for `categories` and `courses`.

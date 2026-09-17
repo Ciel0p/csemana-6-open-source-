@@ -20,13 +20,12 @@ export class App {
   /**
    * Translation service instance.
    */
-  private translate: TranslateService;
+  private translate = inject(TranslateService);
 
   /**
    * Creates an instance of App and sets up translation.
    */
   constructor() {
-    this.translate = inject(TranslateService);
     this.translate.addLangs(['en', 'es']);
     this.translate.use('en');
   }

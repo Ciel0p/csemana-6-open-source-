@@ -63,7 +63,7 @@ export class CourseForm {
       this.courseId = params['id'] ? +params['id'] : null;
       this.isEdit = !!this.courseId;
       if (this.isEdit && this.courseId) {
-        let id = this.courseId;
+        const id = this.courseId;
         const course = this.store.getCourseById(id)();
         if (course) {
           this.form.patchValue({

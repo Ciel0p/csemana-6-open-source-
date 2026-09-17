@@ -1,39 +1,274 @@
 @startuml
-' Learning Center Application - Domain-Driven Design Class Diagram (LearningApi Added, AppComponent Included)
+' Learning Center Application - Domain-Driven Design Class Diagram
 
 package "app" {
+
+  ' ==========================================
+  ' SHARED BOUNDED CONTEXT
+  ' ==========================================
+  package "shared" {
+    package "domain.model" {
+      interface BaseEntity {
+        +id: number
+      }
+    }
+
+    package "infrastructure" {
+      interface BaseResource {
+        +id: number
+      }
+
+      interface BaseResponse {
+      }
+
+      interface BaseAssembler<TEntity, TResource, TResponse> {
+        +toEntitiesFromResponse(response: TResponse): TEntity[]
+        +toEntityFromResource(resource: TResource): TEntity
+        +toResourceFromEntity(entity: TEntity): TResource
+      }
+
+      abstract class ErrorHandlingEnabledBaseType {
+        #handleError(operation: string): (error: HttpErrorResponse) => Observable<never>
+      }
+
+      abstract class BaseApiEndpoint<TEntity, TResource, TResponse, TAssembler> {
+        #http: HttpClient
+        #endpointUrl: string
+        #assembler: TAssembler
+        +getAll(): Observable<TEntity[]>
+        +getById(id: number): Observable<TEntity>
+        +create(entity: TEntity): Observable<TEntity>
+        +update(entity: TEntity, id: number): Observable<TEntity>
+        +delete(id: number): Observable<void>
+      }
+
+      abstract class BaseApi {
+      }
+
+      BaseApiEndpoint --|> ErrorHandlingEnabledBaseType : extends
+      BaseApiEndpoint --> BaseAssembler : uses
+      BaseAssembler ..> BaseEntity : converts
+      BaseAssembler ..> BaseResource : converts
+      BaseAssembler ..> BaseResponse : converts
+    }
+
+    package "presentation" {
+      abstract class BaseForm {
+        #isInvalidControl(form: FormGroup, controlName: string): boolean
+        #errorMessageForControl(form: FormGroup, controlName: string): string
+      }
+
+      package "components" {
+        class FooterContent <<Component>> {
+        }
+        class LanguageSwitcher <<Component>> {
+          +currentLang: string
+          +languages: string[]
+          +useLanguage(language: string): void
+        }
+        class Layout <<Component>> {
+          +options: Array<{link: string, label: string}>
+        }
+      }
+
+      package "views" {
+        class About <<Component>> {
+        }
+        class Home <<Component>> {
+        }
+        class PageNotFound <<Component>> {
+          +invalidPath: string
+          +ngOnInit(): void
+          +navigateToHome(): void
+        }
+      }
+
+      Layout --> FooterContent : contains
+      Layout --> LanguageSwitcher : contains
+      Layout --> Home : renders
+      Layout --> About : renders
+      Layout --> PageNotFound : renders
+    }
+  }
+
+  ' ==========================================
+  ' IAM BOUNDED CONTEXT
+  ' ==========================================
+  package "iam" {
+    package "domain.model" {
+      class User <<Entity>> {
+        - #id: number
+        - #username: string
+        +id: number
+        +username: string
+      }
+      User ..|> app.shared.domain.model.BaseEntity : implements
+
+      class SignInCommand {
+        - #username: string
+        - #password: string
+        +username: string
+        +password: string
+      }
+
+      class SignUpCommand {
+        - #username: string
+        - #password: string
+        +username: string
+        +password: string
+      }
+    }
+
+    package "infrastructure" {
+      class SignInResource <<Resource>> {
+        +id: number
+        +username: string
+        +token: string
+      }
+      class SignUpResource <<Resource>> {
+        +id: number
+        +username: string
+      }
+      class SignInResponse <<Response>> {
+      }
+      class SignUpResponse <<Response>> {
+      }
+
+      class SignInAssembler <<Assembler>> {
+        +toEntityFromResource(resource: SignInResource): User
+      }
+      class SignUpAssembler <<Assembler>> {
+        +toEntityFromResource(resource: SignUpResource): User
+      }
+
+      class SignInApiEndpoint {
+        -endpointUrl: string
+        -assembler: SignInAssembler
+        +signIn(command: SignInCommand): Observable<User>
+      }
+      class SignUpApiEndpoint {
+        -endpointUrl: string
+        -assembler: SignUpAssembler
+        +signUp(command: SignUpCommand): Observable<User>
+      }
+
+      class IamApi {
+        -signInEndpoint: SignInApiEndpoint
+        -signUpEndpoint: SignUpApiEndpoint
+        +signIn(command: SignInCommand): Observable<User>
+        +signUp(command: SignUpCommand): Observable<User>
+      }
+
+      SignInApiEndpoint --|> app.shared.infrastructure.ErrorHandlingEnabledBaseType : extends
+      SignUpApiEndpoint --|> app.shared.infrastructure.ErrorHandlingEnabledBaseType : extends
+      IamApi --|> app.shared.infrastructure.BaseApi : extends
+      IamApi --> SignInApiEndpoint : delegates to
+      IamApi --> SignUpApiEndpoint : delegates to
+      SignInApiEndpoint --> SignInAssembler : uses
+      SignUpApiEndpoint --> SignUpAssembler : uses
+      SignInAssembler --> User : builds
+      SignUpAssembler --> User : builds
+    }
+
+    package "application" {
+      class IamStore <<Store>> {
+        -iamApi: IamApi
+        -currentUserSignal: WritableSignal<User | null>
+        -tokenSignal: WritableSignal<string | null>
+        +currentUser: Signal<User | null>
+        +isSignedIn: Signal<boolean>
+        +currentUsername: Signal<string>
+        +signIn(command: SignInCommand, navigateTo: string[]): void
+        +signUp(command: SignUpCommand, navigateTo: string[]): void
+        +signOut(): void
+      }
+      IamStore --> IamApi : uses
+      IamStore --> User : manages
+    }
+
+    package "presentation" {
+      package "components" {
+        class AuthenticationSection <<Component>> {
+          -iamStore: IamStore
+          -router: Router
+          +isSignedIn: Signal<boolean>
+          +currentUsername: Signal<string>
+          +onSignIn(): void
+          +onSignUp(): void
+          +onSignOut(): void
+        }
+      }
+
+      package "views" {
+        class SignInForm <<Component>> {
+          -formBuilder: FormBuilder
+          -iamStore: IamStore
+          -router: Router
+          +signInForm: FormGroup
+          +onSubmit(): void
+        }
+        class SignUpForm <<Component>> {
+          -formBuilder: FormBuilder
+          -iamStore: IamStore
+          -router: Router
+          +signUpForm: FormGroup
+          +onSubmit(): void
+        }
+      }
+
+      AuthenticationSection --> IamStore : uses
+      SignInForm --|> app.shared.presentation.BaseForm : extends
+      SignUpForm --|> app.shared.presentation.BaseForm : extends
+      SignInForm --> IamStore : uses
+      SignUpForm --> IamStore : uses
+    }
+  }
+
+  ' ==========================================
+  ' LEARNING BOUNDED CONTEXT
+  ' ==========================================
   package "learning" {
     package "domain.model" {
       class Category <<Entity>> {
+        - #id: number
+        - #name: string
+        +id: number
         +name: string
-        +getName(): string
-        +setName(name: string): void
       }
+      Category ..|> app.shared.domain.model.BaseEntity : implements
+
       class Course <<Entity>> {
+        - #id: number
+        - #title: string
+        - #description: string
+        - #categoryId: number
+        - #category: Category | null
+        +id: number
         +title: string
-        +category: Category
-        +getTitle(): string
-        +setTitle(title: string): void
-        +getCategory(): Category
-        +setCategory(category: Category): void
+        +description: string
+        +categoryId: number
+        +category: Category | null
       }
-      Category "1" <|-- "*" Course : contains
+      Course ..|> app.shared.domain.model.BaseEntity : implements
+      Category "1" <-- "*" Course : references categoryId
     }
+
     package "infrastructure" {
-      class CategoriesApiEndpoint {
-        // Inherits all methods and attributes from BaseApiEndpoint
+      class CategoryResource <<Resource>> {
+        +id: number
+        +name: string
       }
-      class CoursesApiEndpoint {
-        // Inherits all methods and attributes from BaseApiEndpoint
+      class CourseResource <<Resource>> {
+        +id: number
+        +title: string
+        +description: string
+        +categoryId: number
       }
-      class LearningApi {
-        -coursesEndpoint: CoursesApiEndpoint
-        -categoriesEndpoint: CategoriesApiEndpoint
-        +getCourses(): Observable<Course[]>
-        +getCourse(id: number): Observable<Course>
-        +createCourse(course: Course): Observable<Course>
-        // ...other methods for categories...
+      class CategoriesResponse <<Response>> {
       }
+      class CoursesResponse <<Response>> {
+      }
+
       class CategoryAssembler <<Assembler>> {
         +toEntitiesFromResponse(response: CategoriesResponse): Category[]
         +toEntityFromResource(resource: CategoryResource): Category
@@ -44,132 +279,125 @@ package "app" {
         +toEntityFromResource(resource: CourseResource): Course
         +toResourceFromEntity(entity: Course): CourseResource
       }
-      CategoryAssembler --|> app.shared.infrastructure.BaseAssembler : implements
-      CourseAssembler --|> app.shared.infrastructure.BaseAssembler : implements
-      CategoryAssembler --> Category : converts to/from
-      CourseAssembler --> Course : converts to/from
-      CategoriesApiEndpoint --> CategoryAssembler : uses for conversion
-      CoursesApiEndpoint --> CourseAssembler : uses for conversion
+
+      class CategoriesApiEndpoint {
+      }
+      class CoursesApiEndpoint {
+      }
+
+      class LearningApi {
+        -coursesEndpoint: CoursesApiEndpoint
+        -categoriesEndpoint: CategoriesApiEndpoint
+        +getCourses(): Observable<Course[]>
+        +getCourseById(id: number): Observable<Course>
+        +createCourse(course: Course): Observable<Course>
+        +updateCourse(course: Course): Observable<Course>
+        +deleteCourse(id: number): Observable<void>
+        +getCategories(): Observable<Category[]>
+        +getCategoryById(id: number): Observable<Category>
+        +createCategory(category: Category): Observable<Category>
+        +updateCategory(category: Category): Observable<Category>
+        +deleteCategory(id: number): Observable<void>
+      }
+
+      CategoryAssembler ..|> app.shared.infrastructure.BaseAssembler : implements
+      CourseAssembler ..|> app.shared.infrastructure.BaseAssembler : implements
       CategoriesApiEndpoint --|> app.shared.infrastructure.BaseApiEndpoint : extends
       CoursesApiEndpoint --|> app.shared.infrastructure.BaseApiEndpoint : extends
       LearningApi --|> app.shared.infrastructure.BaseApi : extends
-      LearningApi --> CoursesApiEndpoint : delegates to
       LearningApi --> CategoriesApiEndpoint : delegates to
+      LearningApi --> CoursesApiEndpoint : delegates to
+      CategoriesApiEndpoint --> CategoryAssembler : uses
+      CoursesApiEndpoint --> CourseAssembler : uses
     }
+
     package "application" {
       class LearningStore <<Store>> {
-        +categories: Category[]
-        +courses: Course[]
-        +getCategories(): Category[]
-        +getCourses(): Course[]
-        +addCategory(category: Category): void
-        +addCourse(course: Course): void
+        -learningApi: LearningApi
+        -categoriesSignal: WritableSignal<Category[]>
+        -coursesSignal: WritableSignal<Course[]>
+        -loadingSignal: WritableSignal<boolean>
+        -errorSignal: WritableSignal<string | null>
+        +categories: Signal<Category[]>
+        +courses: Signal<Course[]>
+        +loading: Signal<boolean>
+        +error: Signal<string | null>
+        +loadCategories(): void
+        +loadCourses(): void
+        +createCategory(category: Category): void
         +updateCategory(category: Category): void
+        +deleteCategory(id: number): void
+        +createCourse(course: Course): void
         +updateCourse(course: Course): void
-        +removeCategory(categoryId: string): void
-        +removeCourse(courseId: string): void
+        +deleteCourse(id: number): void
+        +getCategoryById(id: number): Category | undefined
+        +getCourseById(id: number): Course | undefined
       }
+      LearningStore --> LearningApi : uses
       LearningStore --> Category : manages
       LearningStore --> Course : manages
     }
-    package "presentation.views" {
-      class CategoryForm <<Component>> {
-        +store: LearningStore
-        +isEdit: boolean
-        +categoryId: number | null
-        +submit(): void
+
+    package "presentation" {
+      package "views" {
+        class CategoryList <<Component>> {
+          -learningStore: LearningStore
+          -router: Router
+          +displayedColumns: string[]
+          +dataSource: Signal<MatTableDataSource<Category>>
+          +paginator: Signal<MatPaginator>
+          +sort: Signal<MatSort>
+          +onEdit(id: number): void
+          +onDelete(id: number): void
+          +onAdd(): void
+        }
+        class CategoryForm <<Component>> {
+          -formBuilder: FormBuilder
+          -learningStore: LearningStore
+          -router: Router
+          -route: ActivatedRoute
+          +categoryForm: FormGroup
+          +isEdit: boolean
+          +onSubmit(): void
+          +onCancel(): void
+        }
+        class CourseList <<Component>> {
+          -learningStore: LearningStore
+          -router: Router
+          +displayedColumns: string[]
+          +dataSource: Signal<MatTableDataSource<Course>>
+          +paginator: Signal<MatPaginator>
+          +sort: Signal<MatSort>
+          +getCategoryName(categoryId: number): string
+          +onEdit(id: number): void
+          +onDelete(id: number): void
+          +onAdd(): void
+        }
+        class CourseForm <<Component>> {
+          -formBuilder: FormBuilder
+          -learningStore: LearningStore
+          -router: Router
+          -route: ActivatedRoute
+          +courseForm: FormGroup
+          +categories: Signal<Category[]>
+          +isEdit: boolean
+          +onSubmit(): void
+          +onCancel(): void
+        }
       }
-      class CategoryList <<Component>> {
-        +store: LearningStore
-        +displayedColumns: string[]
-        +editCategory(id: number): void
-        +deleteCategory(id: number): void
-        +navigateToNew(): void
-        +ngAfterViewChecked(): void
-      }
-      class CourseForm <<Component>> {
-        +store: LearningStore
-        +categories: any
-        +isEdit: boolean
-        +courseId: number | null
-      }
-      class CourseList <<Component>> {
-        +store: LearningStore
-        +displayedColumns: string[]
-        +editCourse(id: number): void
-        +deleteCourse(id: number): void
-        +navigateToNew(): void
-        +ngAfterViewChecked(): void
-      }
-      CategoryForm ..> LearningStore : uses
-      CategoryList ..> LearningStore : uses
-      CourseForm ..> LearningStore : uses
-      CourseList ..> LearningStore : uses
+
+      CategoryList --> LearningStore : uses
+      CategoryForm --> LearningStore : uses
+      CourseList --> LearningStore : uses
+      CourseForm --> LearningStore : uses
     }
   }
-  package "shared" {
-    package "infrastructure" {
-      abstract class BaseApiEndpoint {
-        -http: HttpClient
-        -endpointUrl: string
-        -assembler: BaseAssembler
-        +getAll(): Observable<BaseEntity[]>
-        +getById(id: number): Observable<BaseEntity>
-        +create(entity: BaseEntity): Observable<BaseEntity>
-        +update(entity: BaseEntity, id: number): Observable<BaseEntity>
-        +delete(id: number): Observable<void>
-        #handleError(operation: string): (error: HttpErrorResponse) => Observable<never>
-      }
-      class BaseApi {
-        +request(endpoint: string): any
-      }
-      interface BaseAssembler <<Assembler>> {
-        +toEntitiesFromResponse(response: BaseResponse): BaseEntity[]
-        +toEntityFromResource(resource: BaseResource): BaseEntity
-        +toResourceFromEntity(entity: BaseEntity): BaseResource
-      }
-      class BaseEntity <<Entity>> {
-        +id: string
-        +getId(): string
-        +setId(id: string): void
-      }
-      BaseApiEndpoint --> BaseApi : uses
-      BaseApi --> BaseAssembler : uses
-      BaseAssembler --> BaseEntity : converts to/from
-    }
-    package "presentation.components" {
-      class FooterContent <<Component>> {
-      }
-      class LanguageSwitcher <<Component>> {
-        +currentLang: string
-        +languages: string[]
-        +useLanguage(language: string): void
-      }
-      class Layout <<Component>> {
-        +options: {link: string, label: string}[]
-      }
-    }
-    package "presentation.views" {
-      class About <<Component>> {
-      }
-      class Home <<Component>> {
-      }
-      class PageNotFound <<Component>> {
-        +invalidPath: string
-        +ngOnInit(): void
-        +navigateToHome(): void
-      }
-    }
-    Layout --> FooterContent : includes
-    Layout --> LanguageSwitcher : includes
-    Layout --> About : includes
-    Layout --> Home : includes
-    Layout --> PageNotFound : includes
+
+  ' Root Application
+  class App <<Component>> {
   }
-  class AppComponent <<Component>> {
-    // Main application shell component
-    // Add representative attributes/methods if needed
-  }
-  AppComponent --> app.shared.presentation.components.Layout : uses
+  App --> app.shared.presentation.components.Layout : renders
+  app.shared.presentation.components.Layout --> app.iam.presentation.components.AuthenticationSection : includes
 }
+
 @enduml

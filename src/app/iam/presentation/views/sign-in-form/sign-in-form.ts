@@ -43,12 +43,12 @@ export class SignInForm extends BaseForm {
   /**
    * Performs the sign-in operation if the form is valid.
    */
-  performSignIn() {
+  performSignIn = () => {
     if (this.form.invalid) return;
     const signInCommand = new SignInCommand({
       username: this.form.value.username!,
       password: this.form.value.password!
     });
     this.store.signIn(signInCommand, this.router);
-  }
+  };
 }
